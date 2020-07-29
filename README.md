@@ -10,6 +10,11 @@ Next, you need to install the necessary modules via pip:
 ```
 pip3 install pyowm playsound shell mss
 ```
+Clone this repo with Git and go to the directory:
+```
+git clone https://github.com/Oknolaz/vasisualy
+cd vasisualy
+```
 After these steps, just run the script in the terminal with this command:
 ```
 python3 voice.py
@@ -27,6 +32,11 @@ sudo apt-get install python3-speechd vlc
 Далее необходимо установить другие модули с помощью pip:
 ```
 pip3 install pyowm playsound shell mss
+```
+Клонируйте данный репозиторий с помощью Git:
+```
+git clone https://github.com/Oknolaz/vasisualy
+cd vasisualy
 ```
 После этих действий можно смело запускать скрипт командой:
 ```
