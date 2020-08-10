@@ -384,7 +384,7 @@ while True:
         else:
             cnt += 1
     
-    if cnt == 348:
+    if cnt == 352:
         # Фразы для ответа на несуществующие команды
         randwrong = random.choice(wrong)
         tts_d.speak(randwrong)
