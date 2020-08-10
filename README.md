@@ -15,9 +15,13 @@ Clone this repo with Git and go to the directory:
 git clone https://github.com/Oknolaz/vasisualy
 cd vasisualy
 ```
-After these steps, just run the script in the terminal with this command:
+After these steps, just run the script in the terminal with this command for voice input:
 ```
 python3 voice.py
+```
+Or for text input:
+```
+python3 text.py
 ```
 Congratulations! :+1:
 
@@ -38,8 +42,12 @@ pip3 install pyowm playsound shell mss
 git clone https://github.com/Oknolaz/vasisualy
 cd vasisualy
 ```
-После этих действий можно смело запускать скрипт командой:
+После этих действий можно запускать скрипт этой командой для голосового ввода:
 ```
 python3 voice.py
+```
+Или этой для текстового ввода:
+```
+python3 text.py
 ```
 Поздравляю Вас! :+1:
