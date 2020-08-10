@@ -1,7 +1,5 @@
 # Тупой голосовой ассистент, который ничего не умеет версии 0.3.8
 
-import speech_recognition as sr
-from fuzzywuzzy import fuzz
 import os
 from mss import mss
 import random
@@ -13,17 +11,12 @@ from playsound import playsound
 from shell import shell
 import requests
 
-q = sr.Recognizer()
-w = sr.Microphone(device_index = 0)
 config_dict = get_default_config()
 config_dict['language'] = 'ru'
 cnt = 0
 cnt_speak = 0
 now = datetime.datetime.now() # Получение текущего времени
 say = "0"
-
-with w as source :
-    audio = q.listen(source)
 
 # Настройки синтезатора
 tts_d = speechd.SSIPClient('test')
@@ -34,6 +27,7 @@ tts_d.set_punctuation(speechd.PunctuationMode.SOME)
 
 tts_d.speak('Приветствую, Вас. Меня зовут Васисуалий. Чем могу быть полезен?')
 print("Приветствую Вас. Меня зовут Васисуалий. Чем могу быть полезен? (Для выхода просто попрощайтесь с Васисуалием)")
+
 
 time = ("время", "Время", "Который час", "который час", "подскажи время", "Подскажи время", "Сколько время", "сколько время", "Сколько времени", "сколько времени", "час", "Час", "дата", "Дата") # Команды времени
 
@@ -81,8 +75,7 @@ with open('cities.txt') as f:
 
 # Главный цикл (потому что он единственный)
 while True:
-    say = q.recognize_google(audio, language="ru-RU").lower()
-    print("Вы: " + say)
+    say = input("Вы: ")
     
     for i in time:
         if i in say:
