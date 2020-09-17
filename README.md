@@ -8,7 +8,7 @@ sudo apt-get install python3-speechd python3-pyqt5 vlc python3-pyqt5.qtwebengine
 ```
 Next, you need to install the necessary modules via pip:
 ```
-pip3 install pyowm shell mss
+pip3 install pyowm shell mss pyqt5_material
 ```
 Clone this repo with Git and go to the directory:
 ```
@@ -39,7 +39,7 @@ sudo apt-get install python3-speechd python3-pyqt5 vlc python3-pyqt5.qtwebengine
 ```
 Далее необходимо установить другие модули с помощью pip:
 ```
-pip3 install pyowm shell mss
+pip3 install pyowm shell mss pyqt5_material
 ```
 Клонируйте данный репозиторий с помощью Git:
 ```
