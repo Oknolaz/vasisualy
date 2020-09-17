@@ -1,7 +1,5 @@
 # Тупой голосовой ассистент, который ничего не умеет версии 0.4.1
 
-import speech_recognition as sr
-from fuzzywuzzy import fuzz
 import os
 from mss import mss
 import random
