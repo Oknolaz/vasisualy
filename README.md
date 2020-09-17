@@ -4,7 +4,7 @@ Vasisualy can tell the current time, tell about himself, make a funny story, tel
 ## Getting Started
 First, to run this script, you need to install the [RHVoice](https://github.com/Olga-Yakovleva/RHVoice/) speech synthesizer. Then you need to install the speechd module for python, PyQt5 and VLC player using package manager for your distribution (like apt):
 ```
-sudo apt-get install python3-speechd python3-pyqt5 vlc
+sudo apt-get install python3-speechd python3-pyqt5 vlc python3-pyqt5.qtwebengine
 ```
 Next, you need to install the necessary modules via pip:
 ```
@@ -35,7 +35,7 @@ Congratulations! :+1:
 ## Установка
 Для начала Вам понадобится установить синтезатор речи [RHVoice](https://github.com/Olga-Yakovleva/RHVoice/). Затем нужно нужно установить модуль speechd для Python, PyQt5 и VLC плеер с помощью менеджера пакетов в вашем дистрибутиве (например apt):
 ```
-sudo apt-get install python3-speechd python3-pyqt5 vlc
+sudo apt-get install python3-speechd python3-pyqt5 vlc python3-pyqt5.qtwebengine
 ```
 Далее необходимо установить другие модули с помощью pip:
 ```
