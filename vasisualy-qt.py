@@ -1,5 +1,7 @@
 # Тупой голосовой ассистент, который ничего не умеет версии 0.4.1
 
+from notificator import notificator
+from notificator.alingments import TopLeft
 import os
 from mss import mss
 import random
@@ -339,6 +341,8 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow):
                     shell(f"mkdir /home/{home}/'Уёбок хуев'")
                     shell(f'mkdir /home/{home}/Еблан')
                     shell(f'mkdir /home/{home}/хуй')
+                note = notificator()
+                note.critical("Очень зря!","Посмотри, что у тебя в домашней директории :)")
                 cnt_speak += 1
                 if cnt_speak == 1: break
             else:
@@ -598,7 +602,7 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow):
                 self.speak("Вы нашли то что искали?")
             else:
                 cnt += 1
-        print(cnt)
+        
         if say == '' or say == ' ':
             pass
         
