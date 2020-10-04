@@ -1,15 +1,13 @@
-# Тупой голосовой ассистент, который ничего не умеет версии 0.4.1
-
+# coding: utf-8
+import pyttsx3
 from notificator import notificator
 from notificator.alingments import TopLeft
 import os
 from mss import mss
 import random
-import speechd
 import datetime
 from pyowm.owm import OWM
 from pyowm.utils.config import get_default_config
-from shell import shell
 from VasQt import design
 import sys
 from PyQt5 import QtWidgets
@@ -18,6 +16,7 @@ from VasQt import Weather
 from pyqt5_material import apply_stylesheet
 from VasQt import map
 import wikipedia
+import webbrowser
 from VasQt import radio
 import vlc
 
@@ -26,14 +25,7 @@ config_dict['language'] = 'ru'
 cnt_speak = 0
 now = datetime.datetime.now() # Получение текущего времени
 wikipedia.set_lang("ru")
-
-# Настройки синтезатора
-tts_d = speechd.SSIPClient('Vasisya')
-tts_d.set_output_module('rhvoice')
-tts_d.set_language('ru')
-tts_d.set_rate(25)
-tts_d.set_punctuation(speechd.PunctuationMode.NONE)
-tts_d.set_pitch(-20)
+engine = pyttsx3.init()
 
 time = ("время", "Время", "Который час", "который час", "подскажи время", "Подскажи время", "Сколько время", "сколько время", "Сколько времени", "сколько времени", "час", "Час", "дата", "Дата", "Какой месяц", "какой месяц", "Какая неделя", "какая неделя", "Какой день", "какой день") # Команды времени
 
@@ -111,7 +103,6 @@ maps = ("Карта", "карта", "Карты", "карты", "Навигат�
 
 qwiki = ("Что такое", "что такое", "Что это такое", "что это такое", "Это", "это", "Чем является", "чем является", "Кем является", "кем является", "Кто такой", "кто такой", "Кто такая", "кто такая", "Кто такие", "кто такие", "Кто это такой", "кто это такой", "Кто это такая", "кто это такая", "Кто эти такие", "кто эти такие", "Кто он такой", "кто он такой", "Кто она такая", "кто она такая", "Кто они такие", "кто они такие", "Кто это", "кто это", "Кто эти", "кто эти", "Кто он", "кто он", "Кто она", "кто она", "Кто они", "кто они") # Команды вывода информации из википедии
 
-
 # Окно для диалога выбора погоды города
 class Weather(QtWidgets.QWidget, Weather.Ui_weather):
     def __init__(self):
@@ -155,7 +146,7 @@ class Weather(QtWidgets.QWidget, Weather.Ui_weather):
                             tts_d.speak("На улице очень холодно, лучше туда не ходить. Выпейте горячего чаю.")
                 except Exception:
                     tts_d.speak("Для данного действия мне необходим интернет и правильное название города!")
-    
+                    
 # Окно радиоплеера
 class radioplayer(QtWidgets.QWidget, radio.Ui_Form):
     def __init__(self):
@@ -181,7 +172,6 @@ class radioplayer(QtWidgets.QWidget, radio.Ui_Form):
             self.playpause.setText("Pause")
             self.is_paused = False
         
-
 # Окно для диалога выбора радиостанции
 class radio(QtWidgets.QWidget, radiowindow.Ui_Radiochoice):
     def __init__(self):
@@ -199,51 +189,45 @@ class radio(QtWidgets.QWidget, radiowindow.Ui_Radiochoice):
         electro = "http://pub0202.101.ru:8000/stream/trust/mp3/128/18?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpcCI6IjUxLjE1OC4xNDQuMzIiLCJ1c2VyYWdlbnQiOiJNb3ppbGxhXC81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NDsgcnY6NjguMCkgR2Vja29cLzIwMTAwMTAxIEZpcmVmb3hcLzY4LjAiLCJ1aWRfY2hhbm5lbCI6IjE4IiwidHlwZV9jaGFubmVsIjoiY2hhbm5lbCIsImV4cCI6MTU5NjI3NDIzM30.QgEVxowg5isL-Bx21mGRHlJtQVrlBMpPGMYedjxzAQM"
         jazz = "http://pub0202.101.ru:8000/stream/pro/aac/128/85?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpcCI6IjUxLjE1OC4xNDQuMzIiLCJ1c2VyYWdlbnQiOiJNb3ppbGxhXC81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NDsgcnY6NjguMCkgR2Vja29cLzIwMTAwMTAxIEZpcmVmb3hcLzY4LjAiLCJ1aWRfY2hhbm5lbCI6Ijg1IiwidHlwZV9jaGFubmVsIjoiY2hhbm5lbCIsImV4cCI6MTU5NjI3NDMzM30.qMRUJuGhdAWRkuWJ9l4NscxmsKy26y8q0risQrU_Nt0"
         haha = "http://pub0202.101.ru:8000/stream/trust/mp3/128/22?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpcCI6IjUxLjE1OC4xNDQuMzIiLCJ1c2VyYWdlbnQiOiJNb3ppbGxhXC81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NDsgcnY6NjguMCkgR2Vja29cLzIwMTAwMTAxIEZpcmVmb3hcLzY4LjAiLCJ1aWRfY2hhbm5lbCI6IjIyIiwidHlwZV9jaGFubmVsIjoiY2hhbm5lbCIsImV4cCI6MTU5NjI3NDQyM30.ANuy-hUvzST9xpLCHF1pJEbFcdCY1x_Kpnr6tfK_Yrc"
+        engine.say("Сейчас вы услышите выбранное радио.")
+        engine.runAndWait()
         if radio_choice == "Рок":
-            tts_d.speak("Сейчас вы услышите выбранное радио.")
             url = rock
             self.dialog = radioplayer()
             self.dialog.show()
         elif radio_choice == "Поп":
-            tts_d.speak("Сейчас вы услышите выбранное радио.")
             url = pop
             self.dialog = radioplayer()
             self.dialog.show()
         elif radio_choice == "Рэп":
-            tts_d.speak("Сейчас вы услышите выбранное радио.")
             url = hip_hop
             self.dialog = radioplayer()
             self.dialog.show()
         elif radio_choice == "Танцевальная":
-            tts_d.speak("Сейчас вы услышите выбранное радио.")
             url = dance
             self.dialog = radioplayer()
             self.dialog.show()
         elif radio_choice == "Техно":
-            tts_d.speak("Сейчас вы услышите выбранное радио.")
             url = electro
             self.dialog = radioplayer()
             self.dialog.show()
         elif radio_choice == "Джаз":
-            tts_d.speak("Сейчас вы услышите выбранное радио.")
             url = jazz
             self.dialog = radioplayer()
             self.dialog.show()
         elif radio_choice == "Юмор":
-            tts_d.speak("Сейчас вы услышите выбранное радио.")
             url = haha
             self.dialog = radioplayer()
             self.dialog.show()
         else:
-            tts_d.speak("Простите, я не знаю такой радиостанции.")
-
-# Окно для показа OpenStreetMap            
+            engine.say("Простите, я не знаю такой радиостанции.")
+            engine.runAndWait()
+            
 class OpenVasMap(QtWidgets.QWidget, map.Ui_Form):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
         
-
 # Главное окно программы
 class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow):
     def __init__(self):
@@ -255,10 +239,11 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow):
         
     def speak(self, string):
         # Функция выводит нужный результат на экран и заставляет синтезатор речи говорить этот результат
-        tts_d.speak(string)
+        engine.say(string)
+        engine.runAndWait()
         self.listWidget.addItem(string)
         self.listWidget.scrollToBottom()
-    
+        
     def program(self):
         # Сама программа
         cnt = 0
@@ -272,17 +257,17 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow):
             else:
                 cnt += 1
             cnt_speak = 0
-
+        
         for i in kill:
             if i in say:
                 # Завершение программы
                 bye = random.choice(("Пока, мой друг.", "Пока, создатель.", "До встречи.", "Прощай", "До свидания", "Не покидай меня, Создатель!", "Очень жаль расставаться с тобой."))
-                tts_d.speak(bye)
-                tts_d.close()
+                engine.say(bye)
+                engine.runAndWait()
                 exit()
             else:
                 cnt += 1
-    
+                
         for i in fuckoff:
             if i in say:
                 # Говорить данные фразы при оскорблении
@@ -293,7 +278,7 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow):
             else:
                 cnt += 1
             cnt_speak = 0
-    
+            
         for i in life:
             if i in say:
                 # Рассказ о себе
@@ -303,7 +288,7 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow):
             else:
                 cnt += 1
             cnt_speak = 0
-    
+            
         for i in fun:
             if i in say:
                 # Говорить анекдоты
@@ -314,7 +299,7 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow):
             else:
                 cnt += 1
             cnt_speak = 0
-    
+            
         for i in weather:
             if i in say:
                 self.speak("Назовите ваш город.")
@@ -323,28 +308,21 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow):
             else:
                 cnt += 1
             cnt_speak = 0
-    
-        for i in music:
-            if i in say:
-                self.speak("Выберете радио, которое хотите прослушать.")
-                self.dialog = radio()
-                self.show_dialog()
-            else:
-                cnt += 1
-            cnt_speak = 0
-    
+            
         for i in browser:
             if i in say:
                 # Открытие браузера по умолчанию с помощью терминала
-                tts_d.speak("Создатель, я открыл браузер.")
-                shell('x-www-browser')
-                tts_d.speak("Что интересного там нашли?")
+                engine.say("Создатель, я открыл браузер.")
+                engine.runAndWait()
+                webbrowser.open('https://www.duckduckgo.com/') 
+                engine.say("Что интересного там нашли?")
+                engine.runAndWait()
                 cnt_speak += 1
                 if cnt_speak == 1: break
             else:
                 cnt += 1
             cnt_speak = 0
-    
+            
         for i in platon:
             if say == i:
                 # Ответы насчёт Платоши. Добавлены для того, чтобы поржать над Платошей
@@ -355,21 +333,19 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow):
             else:
                 cnt += 1
             cnt_speak = 0
-        
+            
         for i in screen:
             if i in say:
                 self.speak("Я сделал снимок экрана.")
-                who = shell('whoami') # Ввод команды whoami в терминале
-                who = who.output()[0] # Присвоение переменой имени текущего пользователя
-                os.chdir(f"/home/{who}/") # Смена директории на домашнюю для данного пользователя
+                os.chdir("C:\\") # Смена директории
                 with mss() as sct:
-                    sct.shot() # Создание скриншота в файл monitor-1.png в домашней директории
+                    sct.shot() # Создание скриншота в файл monitor-1.png
                 cnt_speak += 1
                 if cnt_speak == 1: break
             else:
                 cnt += 1
             cnt_speak = 0
-    
+        
         for i in thankyou:
             if i in say:
                 thank = random.choice(("Рад стараться для тебя :)", "Всегда к вашим услугам.", "Не нужно меня благодарить, я всего лишь тупой голосовой ассистент.", "Тебе спасибо, друг.", "Всегда готов к работе.", "Люблю, когда меня благодарят.", "Я счастлив служить тебе.")) # Случайный выбор ответа на благодарность
@@ -379,17 +355,12 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow):
             else:
                 cnt += 1
             cnt_speak = 0
-    
+            
         for i in ("Шлепок майонезный", "шлепок майонезный"):
             if i in say:
                 self.speak("Это самое обидное, что мне когда-либо говорили.\nТы обидел меня - теперь я обижу тебя.")
-                who = shell('whoami') # Ввод команды whoami в терминале
-                for home in who.output():
-                    # Создание папок с обидными названиями через терминал
-                    shell(f'mkdir /home/{home}/Долбаёб')
-                    shell(f"mkdir /home/{home}/'Уёбок хуев'")
-                    shell(f'mkdir /home/{home}/Еблан')
-                    shell(f'mkdir /home/{home}/хуй')
+                os.chdir("C:\\")
+                os.makedirs("Дурачок", "Хуй", "Еблан", "ёбик", "Шиндозник")
                 note = notificator()
                 note.critical("Очень зря!","Посмотри, что у тебя в домашней директории :)")
                 cnt_speak += 1
@@ -397,7 +368,7 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow):
             else:
                 cnt += 1
             cnt_speak = 0
-    
+            
         for i in hi:
             if i in say:
                 hi_vas = random.choice(("Приветствую Вас.", "Рад Вас слышать.", "Хай.", "Здаров.", "Привет.", "О, привет.", "Здравствуйте.", "Привет, человек."))
@@ -407,18 +378,18 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow):
             else:
                 cnt += 1
             cnt_speak = 0
-        
+            
         for i in search:
             if i in say:
                 self.speak("Сейчас найду.")
-                shell(f"x-www-browser 'https://duckduckgo.com/{say}'") # Поиск данного запроса в интернетах
+                webbrowser.open(f"https://duckduckgo.com/{say}")
                 self.speak("Вы нашли то что искали?")
                 cnt_speak += 1
                 if cnt_speak == 1: break
             else:
                 cnt += 1
             cnt_speak = 0
-                    
+            
         for i in loveyou:
             if i in say:
                 loveme = random.choice(("Я люблю тебя, хоуми", "Спасибо.", "Не стоит - я всего лишь тупой голосовой ассистент.", "Почему ты меня так любишь?", "Я уважаю тебя за это.", "Не нужно привязываться ко мне. Я не живой, хотя мне очень хочется :(", "Я люблю людей.")) # Случайный выбор ответа из данного кортежа
@@ -428,7 +399,7 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow):
             else:
                 cnt += 1
             cnt_speak = 0
-        
+            
         for i in no:
             if i in say:
                 sorry = random.choice(("Жаль.", "Очень жаль.", "Мне жаль.", "Мне очень жаль.", "Извините меня.", "Простите. Я был неправ.", "Я ещё очень тупой, простите меня.", "Я не могу хорошо работать на ранней стадии разработки.", "Извините... я... я... я могу слишком мало. :("))
@@ -438,31 +409,33 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow):
             else:
                 cnt += 1
             cnt_speak = 0
-    
+            
         for i in poweroff:
             if i in say:
-                tts_d.speak("Я выключаю компьтер. До свидания.")
+                engine.say("Я выключаю компьтер. До свидания.")
+                engine.runAndWait()
                 os.system('shutdown -s')
             else:
                 cnt += 1
-    
+                
         for i in video:
             if i in say:
                 video_search = say.replace(i, '')
-                shell(f"x-www-browser 'https://www.youtube.com/results?search_query={video_search}'")
+                webbrowser.open(f"https://www.youtube.com/results?search_query={video_search}")
                 cnt_speak += 1
                 if cnt_speak == 1: break
             else:
                 cnt += 1
             cnt_speak = 0
-        
+            
         for i in reboot:
             if i in say:
-                tts_d.speak("До встречи!")
+                engine.say("До встречи!")
+                engine.runAndWait()
                 os.system("shutdown /r /t 1")
             else:
                 cnt += 1
-            
+                
         for i in wherelive:
             if i in say:
                 self.speak("Я живу в твоём устройстве и в сети Интернет. Не надо искать меня внутри компьютера... Пожалуйста!")
@@ -471,25 +444,7 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow):
             else:
                 cnt += 1
             cnt_speak = 0
-        
-        for i in launchapp:
-            if i in say:
-                app = say.replace(i, "")
-                try:
-                    if app == " " or app == "":
-                        self.speak("Я вас непонимаю. Вы не ввели название программы!")
-                    else:
-                        tts_d.speak(f"Я запустил {app}.")
-                        shell(app)
-                except Exception:
-                    tts_d.speak("Нет такой программы")
-                    self.listWidget.addItem("Эта программа не установлена на вашем компьютере или она не находится в /usr/bin/")
-                cnt_speak += 1
-                if cnt_speak == 1: break
-            else:
-                cnt += 1
-            cnt_speak = 0
-        
+            
         for i in coin:
             if i == say:
                 random_coin = random.choice(("орёл", "решка"))
@@ -499,7 +454,7 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow):
             else:
                 cnt += 1
             cnt_speak = 0
-        
+            
         for i in vas_say:
             if i in say:
                 hesay = say.replace(i, "")
@@ -509,14 +464,12 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow):
             else:
                 cnt += 1
             cnt_speak = 0
-        
+            
         for i in skorogovorka:
             if i in say:
                 skorogovorki = random.choice(("Шла Саша по шоссе,\nНесла сушку на шесте.\nИ сосала сушку.", "На дворе трава,\nНа траве дрова.\nНе руби дрова\nНа траве двора.", "Триста тридцать три корабля\nЛавировали, лавировали,\nЛавировали, лавировали,\nЛавировали, лавировали,\nДа и не вылавировали,\nДа и не вылавировали,\nДа и не вылавировали.", "От топота копыт пыль по полю летит.", "Четыре чёрненьких\nЧумазеньких чертёнка\nЧертили чёрными\nЧернилами чертёж\nЧрезвычайно чётко.", "Карл у Клары украл кораллы,\nА Клара у Карла украла кларнет.\nЕсли бы Карл не крал у Клары кораллы,\nТо Клара не крала б у Карла кларнет.", "Ехал Грека через реку.\nВидит Грека в реке рак.\nСунул в реку руку Грека.\nРак за руку Грека — цап.", "Интервьюер интервента интервьюировал.", "Жили-были три китайца: Як, Як-цедрак, Як цедрак-цедрак-цедрони.\nЖили-были три китайки: Цыпа, Цыпа-дрыпа, Цыпа-дрыпа-дрымпампони.\nВсе они переженились: Як на Цыпе, Як-цедрак на Цыпе-дрыпе,\nЯк-цедрак-цедрак-цедрони на Цыпе-дрыпе-дрымпампони.\nИ у них родились дети. У Яка с Цыпой - Шах, у Яка-цедрака с Цыпой-дрыпой - Шах-шарах, у Яка-цедрака-цедрака-цедрони с Цыпой-дрыпой-дрымпампони - Шах-шарах-шарах-широни.", "Скороговорун скороговорил скоровыговаривал,\nЧто всех скороговорок не перескороговоришь не перескоровыговариваешь,\nНо, заскороговорившись, выскороговорил,\nЧто все скороговорки перескороговоришь, да не перескоровыговариваешь.", "Везет Сенька Саньку с Сонькой на санках.\nСанки скок, Сеньку с ног, Соньку в лоб, все - в сугроб.", "Шестнадцать шли мышей и шесть нашли грошей,\nа мыши, что поплоше, шумливо шарят гроши.", "Расчувствовавшаяся Лукерья расчувствовала нерасчувствовавшегося Николку.", "Косарь Касьян косой косит косо.\nНе скосит косарь Касьян покоса.", "У ежа - ежата, у ужа - ужата.", "Жутко жуку жить на суку.", "Два щенка щека к щеке щиплют щетку в уголке.", "Разнервничавшегося конституционалиста Пропроколокропенко\nнашли акклиматизировавшимся в Константинополе.", "Яшма в замше замшела."))
-                tts_d.set_rate(60)
                 self.speak(skorogovorki)
                 cnt_speak += 1
-                tts_d.set_rate(25)
                 if cnt_speak == 1: break
             else:
                 cnt += 1
@@ -591,7 +544,7 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow):
             else:
                 cnt += 1
             cnt_speak = 0
-        
+            
         for i in where:
             if i in say:
                 loc_name = say.replace(i, '')
@@ -661,17 +614,14 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow):
                 if question == "" or question == " " or question == "  ":
                     self.speak("Я не могу ответить на отсутствующий вопрос! Задайте вопрос!")
                 else:
-                    try:
-                        answer = wikipedia.summary(question, sentences=4)
-                        self.speak(answer.replace(". ", "\n"))
-                    except Exception:
-                        self.speak("Мне необходим интернет для этого действия.")
+                    answer = wikipedia.summary(question, sentences=4)
+                    self.speak(answer.replace(". ", "\n"))
                 cnt_speak += 1
                 if cnt_speak == 1: break
             else:
                 cnt += 1
             cnt_speak = 0
-
+            
         if say == '' or say == ' ':
             pass
         
@@ -689,7 +639,7 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow):
         
     def show_dialog(self):
         # Функция для показа любого дополнительного окна
-        self.dialog.show() 
+        self.dialog.show()
         
 def main():
     app = QtWidgets.QApplication(sys.argv)
@@ -697,8 +647,7 @@ def main():
     apply_stylesheet(app, theme='dark_blue.xml')
     window.show()
     app.exec_()
-    tts_d.close()
+    engine.stop()
 
 if __name__ == '__main__':
     main()
-
