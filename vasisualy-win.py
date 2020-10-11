@@ -249,6 +249,13 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow):
         cnt = 0
         cnt_speak = 0
         say = self.lineEdit.text()
+        if say == '' or say == ' ':
+            pass
+        else:
+            item = QtWidgets.QListWidgetItem(say)
+            item.setTextAlignment(0x0002)
+            self.listWidget.addItem(item)
+        
         for i in time:
             if i in say:
                 self.speak("Текущее время: " + now.strftime("%d-%m-%Y %H:%M")) # Говорить текущую дату и время
@@ -622,10 +629,10 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow):
                 cnt += 1
             cnt_speak = 0
             
-        if say == '' or say == ' ':
-            pass
+        if say == 'stop' or say == 'Stop' or say == 'Стоп' or say == 'стоп':
+            engine.stop()
         
-        elif cnt == 711:
+        elif cnt == 740:
             # Фразы для ответа на несуществующие команды
             randwrong = random.choice(wrong)
             self.speak(randwrong)

@@ -245,7 +245,7 @@ class OpenVasMap(QtWidgets.QWidget, map.Ui_Form):
         
 
 # Главное окно программы
-class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow):
+class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow, QtWidgets.QListWidgetItem):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
@@ -264,6 +264,13 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow):
         cnt = 0
         cnt_speak = 0
         say = self.lineEdit.text()
+        if say == '' or say == ' ':
+            pass
+        else:
+            item = QtWidgets.QListWidgetItem(say)
+            item.setTextAlignment(0x0002)
+            self.listWidget.addItem(item)
+        
         for i in time:
             if i in say:
                 self.speak("Текущее время: " + now.strftime("%d-%m-%Y %H:%M")) # Говорить текущую дату и время
@@ -663,19 +670,19 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow):
                 else:
                     try:
                         answer = wikipedia.summary(question, sentences=4)
-                        self.speak(answer.replace(". ", "\n"))
+                        self.speak(answer)
                     except Exception:
-                        self.speak("Мне необходим интернет для этого действия.")
+                        self.speak("Я такого не знаю.")
                 cnt_speak += 1
                 if cnt_speak == 1: break
             else:
                 cnt += 1
             cnt_speak = 0
-
-        if say == '' or say == ' ':
-            pass
+            
+        if say == 'stop' or say == 'Stop' or say == 'Стоп' or say == 'стоп':
+            tts_d.stop()
         
-        elif cnt == 711:
+        elif cnt == 749:
             # Фразы для ответа на несуществующие команды
             randwrong = random.choice(wrong)
             self.speak(randwrong)
