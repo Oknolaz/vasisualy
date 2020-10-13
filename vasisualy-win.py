@@ -18,7 +18,6 @@ from VasQt import map
 import wikipedia
 import webbrowser
 from VasQt import radio
-import vlc
 
 config_dict = get_default_config()
 config_dict['language'] = 'ru'
@@ -148,80 +147,80 @@ class Weather(QtWidgets.QWidget, Weather.Ui_weather):
                     tts_d.speak("Для данного действия мне необходим интернет и правильное название города!")
                     
 # Окно радиоплеера
-class radioplayer(QtWidgets.QWidget, radio.Ui_Form):
-    def __init__(self):
-        super().__init__()
-        self.setupUi(self)
-        self.radioname.setText(radio_choice)
-        inst = vlc.Instance()
-        self.player=inst.media_player_new()
-        media=inst.media_new(url)
-        self.player.set_media(media)
-        self.playpause.clicked.connect(self.play)
+#class radioplayer(QtWidgets.QWidget, radio.Ui_Form):
+    #def __init__(self):
+        #super().__init__()
+        #self.setupUi(self)
+        #self.radioname.setText(radio_choice)
+        #inst = vlc.Instance()
+        #self.player=inst.media_player_new()
+        #media=inst.media_new(url)
+        #self.player.set_media(media)
+        #self.playpause.clicked.connect(self.play)
         
-    def play(self):
-        if self.player.is_playing():
-              self.player.pause()
-              self.playpause.setText("Play")
-              self.is_paused = True
-        else:
-            if self.player.play() == -1:
-                self.open_file()
-                return
-            self.player.play()
-            self.playpause.setText("Pause")
-            self.is_paused = False
+    #def play(self):
+        #if self.player.is_playing():
+              #self.player.pause()
+              #self.playpause.setText("Play")
+              #self.is_paused = True
+        #else:
+            #if self.player.play() == -1:
+                #self.open_file()
+                #return
+            #self.player.play()
+            #self.playpause.setText("Pause")
+            #self.is_paused = False
         
 # Окно для диалога выбора радиостанции
-class radio(QtWidgets.QWidget, radiowindow.Ui_Radiochoice):
-    def __init__(self):
-        super().__init__()
-        self.setupUi(self)
-        self.pushButton.clicked.connect(self.set_radio) # Если нажата кнопка - запускается функция set_radio
+#class radio(QtWidgets.QWidget, radiowindow.Ui_Radiochoice):
+    #def __init__(self):
+        #super().__init__()
+        #self.setupUi(self)
+        #self.pushButton.clicked.connect(self.set_radio) # Если нажата кнопка - запускается функция set_radio
         
-    def set_radio(self):
-        global url, radio_choice
-        radio_choice = self.comboBox.currentText() # Берёт значение выбранное в КомбоБоксе
-        rock = "http://pub0302.101.ru:8000/stream/trust/mp3/128/69?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpcCI6IjUxLjE1OC4xNDQuMzIiLCJ1c2VyYWdlbnQiOiJNb3ppbGxhXC81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NDsgcnY6NjguMCkgR2Vja29cLzIwMTAwMTAxIEZpcmVmb3hcLzY4LjAiLCJ1aWRfY2hhbm5lbCI6IjY5IiwidHlwZV9jaGFubmVsIjoiY2hhbm5lbCIsImV4cCI6MTU5NjI3MzUzMn0.04mOBSZ4tirBXTQdbWYpGs8YuJE6Dw7fM7a-zbP-PTs"
-        pop = "http://pub0302.101.ru:8000/stream/pro/aac/64/155?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpcCI6IjUxLjE1OC4xNDQuMzIiLCJ1c2VyYWdlbnQiOiJNb3ppbGxhXC81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NDsgcnY6NjguMCkgR2Vja29cLzIwMTAwMTAxIEZpcmVmb3hcLzY4LjAiLCJ1aWRfY2hhbm5lbCI6IjE1NSIsInR5cGVfY2hhbm5lbCI6ImNoYW5uZWwiLCJleHAiOjE1OTYyNzM2NDh9.9nrmdE85O78l_SWG8ZIbcBb81rlMfjWEFZtyU54v240"
-        hip_hop = "http://pub0202.101.ru:8000/stream/pro/aac/64/8?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpcCI6IjUxLjE1OC4xNDQuMzIiLCJ1c2VyYWdlbnQiOiJNb3ppbGxhXC81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NDsgcnY6NjguMCkgR2Vja29cLzIwMTAwMTAxIEZpcmVmb3hcLzY4LjAiLCJ1aWRfY2hhbm5lbCI6IjgiLCJ0eXBlX2NoYW5uZWwiOiJjaGFubmVsIiwiZXhwIjoxNTk2MjczNzM0fQ.CFeZY0sd_dE8A-Fb_cJDvmfoE03TfentLDYUNc2o5wY"
-        dance = "http://pub0202.101.ru:8000/stream/trust/mp3/128/5?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpcCI6IjUxLjE1OC4xNDQuMzIiLCJ1c2VyYWdlbnQiOiJNb3ppbGxhXC81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NDsgcnY6NjguMCkgR2Vja29cLzIwMTAwMTAxIEZpcmVmb3hcLzY4LjAiLCJ1aWRfY2hhbm5lbCI6IjUiLCJ0eXBlX2NoYW5uZWwiOiJjaGFubmVsIiwiZXhwIjoxNTk2MjczODgyfQ.gyZu0VQMMYfnUhbsD8_I6l2UByX4C757joVrJJGiN9o"
-        electro = "http://pub0202.101.ru:8000/stream/trust/mp3/128/18?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpcCI6IjUxLjE1OC4xNDQuMzIiLCJ1c2VyYWdlbnQiOiJNb3ppbGxhXC81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NDsgcnY6NjguMCkgR2Vja29cLzIwMTAwMTAxIEZpcmVmb3hcLzY4LjAiLCJ1aWRfY2hhbm5lbCI6IjE4IiwidHlwZV9jaGFubmVsIjoiY2hhbm5lbCIsImV4cCI6MTU5NjI3NDIzM30.QgEVxowg5isL-Bx21mGRHlJtQVrlBMpPGMYedjxzAQM"
-        jazz = "http://pub0202.101.ru:8000/stream/pro/aac/128/85?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpcCI6IjUxLjE1OC4xNDQuMzIiLCJ1c2VyYWdlbnQiOiJNb3ppbGxhXC81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NDsgcnY6NjguMCkgR2Vja29cLzIwMTAwMTAxIEZpcmVmb3hcLzY4LjAiLCJ1aWRfY2hhbm5lbCI6Ijg1IiwidHlwZV9jaGFubmVsIjoiY2hhbm5lbCIsImV4cCI6MTU5NjI3NDMzM30.qMRUJuGhdAWRkuWJ9l4NscxmsKy26y8q0risQrU_Nt0"
-        haha = "http://pub0202.101.ru:8000/stream/trust/mp3/128/22?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpcCI6IjUxLjE1OC4xNDQuMzIiLCJ1c2VyYWdlbnQiOiJNb3ppbGxhXC81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NDsgcnY6NjguMCkgR2Vja29cLzIwMTAwMTAxIEZpcmVmb3hcLzY4LjAiLCJ1aWRfY2hhbm5lbCI6IjIyIiwidHlwZV9jaGFubmVsIjoiY2hhbm5lbCIsImV4cCI6MTU5NjI3NDQyM30.ANuy-hUvzST9xpLCHF1pJEbFcdCY1x_Kpnr6tfK_Yrc"
-        engine.say("Сейчас вы услышите выбранное радио.")
-        engine.runAndWait()
-        if radio_choice == "Рок":
-            url = rock
-            self.dialog = radioplayer()
-            self.dialog.show()
-        elif radio_choice == "Поп":
-            url = pop
-            self.dialog = radioplayer()
-            self.dialog.show()
-        elif radio_choice == "Рэп":
-            url = hip_hop
-            self.dialog = radioplayer()
-            self.dialog.show()
-        elif radio_choice == "Танцевальная":
-            url = dance
-            self.dialog = radioplayer()
-            self.dialog.show()
-        elif radio_choice == "Техно":
-            url = electro
-            self.dialog = radioplayer()
-            self.dialog.show()
-        elif radio_choice == "Джаз":
-            url = jazz
-            self.dialog = radioplayer()
-            self.dialog.show()
-        elif radio_choice == "Юмор":
-            url = haha
-            self.dialog = radioplayer()
-            self.dialog.show()
-        else:
-            engine.say("Простите, я не знаю такой радиостанции.")
-            engine.runAndWait()
+    #def set_radio(self):
+        #global url, radio_choice
+        #radio_choice = self.comboBox.currentText() # Берёт значение выбранное в КомбоБоксе
+        #rock = "http://pub0302.101.ru:8000/stream/trust/mp3/128/69?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpcCI6IjUxLjE1OC4xNDQuMzIiLCJ1c2VyYWdlbnQiOiJNb3ppbGxhXC81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NDsgcnY6NjguMCkgR2Vja29cLzIwMTAwMTAxIEZpcmVmb3hcLzY4LjAiLCJ1aWRfY2hhbm5lbCI6IjY5IiwidHlwZV9jaGFubmVsIjoiY2hhbm5lbCIsImV4cCI6MTU5NjI3MzUzMn0.04mOBSZ4tirBXTQdbWYpGs8YuJE6Dw7fM7a-zbP-PTs"
+        #pop = "http://pub0302.101.ru:8000/stream/pro/aac/64/155?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpcCI6IjUxLjE1OC4xNDQuMzIiLCJ1c2VyYWdlbnQiOiJNb3ppbGxhXC81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NDsgcnY6NjguMCkgR2Vja29cLzIwMTAwMTAxIEZpcmVmb3hcLzY4LjAiLCJ1aWRfY2hhbm5lbCI6IjE1NSIsInR5cGVfY2hhbm5lbCI6ImNoYW5uZWwiLCJleHAiOjE1OTYyNzM2NDh9.9nrmdE85O78l_SWG8ZIbcBb81rlMfjWEFZtyU54v240"
+        #hip_hop = "http://pub0202.101.ru:8000/stream/pro/aac/64/8?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpcCI6IjUxLjE1OC4xNDQuMzIiLCJ1c2VyYWdlbnQiOiJNb3ppbGxhXC81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NDsgcnY6NjguMCkgR2Vja29cLzIwMTAwMTAxIEZpcmVmb3hcLzY4LjAiLCJ1aWRfY2hhbm5lbCI6IjgiLCJ0eXBlX2NoYW5uZWwiOiJjaGFubmVsIiwiZXhwIjoxNTk2MjczNzM0fQ.CFeZY0sd_dE8A-Fb_cJDvmfoE03TfentLDYUNc2o5wY"
+        #dance = "http://pub0202.101.ru:8000/stream/trust/mp3/128/5?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpcCI6IjUxLjE1OC4xNDQuMzIiLCJ1c2VyYWdlbnQiOiJNb3ppbGxhXC81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NDsgcnY6NjguMCkgR2Vja29cLzIwMTAwMTAxIEZpcmVmb3hcLzY4LjAiLCJ1aWRfY2hhbm5lbCI6IjUiLCJ0eXBlX2NoYW5uZWwiOiJjaGFubmVsIiwiZXhwIjoxNTk2MjczODgyfQ.gyZu0VQMMYfnUhbsD8_I6l2UByX4C757joVrJJGiN9o"
+        #electro = "http://pub0202.101.ru:8000/stream/trust/mp3/128/18?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpcCI6IjUxLjE1OC4xNDQuMzIiLCJ1c2VyYWdlbnQiOiJNb3ppbGxhXC81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NDsgcnY6NjguMCkgR2Vja29cLzIwMTAwMTAxIEZpcmVmb3hcLzY4LjAiLCJ1aWRfY2hhbm5lbCI6IjE4IiwidHlwZV9jaGFubmVsIjoiY2hhbm5lbCIsImV4cCI6MTU5NjI3NDIzM30.QgEVxowg5isL-Bx21mGRHlJtQVrlBMpPGMYedjxzAQM"
+        #jazz = "http://pub0202.101.ru:8000/stream/pro/aac/128/85?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpcCI6IjUxLjE1OC4xNDQuMzIiLCJ1c2VyYWdlbnQiOiJNb3ppbGxhXC81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NDsgcnY6NjguMCkgR2Vja29cLzIwMTAwMTAxIEZpcmVmb3hcLzY4LjAiLCJ1aWRfY2hhbm5lbCI6Ijg1IiwidHlwZV9jaGFubmVsIjoiY2hhbm5lbCIsImV4cCI6MTU5NjI3NDMzM30.qMRUJuGhdAWRkuWJ9l4NscxmsKy26y8q0risQrU_Nt0"
+        #haha = "http://pub0202.101.ru:8000/stream/trust/mp3/128/22?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpcCI6IjUxLjE1OC4xNDQuMzIiLCJ1c2VyYWdlbnQiOiJNb3ppbGxhXC81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NDsgcnY6NjguMCkgR2Vja29cLzIwMTAwMTAxIEZpcmVmb3hcLzY4LjAiLCJ1aWRfY2hhbm5lbCI6IjIyIiwidHlwZV9jaGFubmVsIjoiY2hhbm5lbCIsImV4cCI6MTU5NjI3NDQyM30.ANuy-hUvzST9xpLCHF1pJEbFcdCY1x_Kpnr6tfK_Yrc"
+        #engine.say("Сейчас вы услышите выбранное радио.")
+        #engine.runAndWait()
+        #if radio_choice == "Рок":
+            #url = rock
+            #self.dialog = radioplayer()
+            #self.dialog.show()
+        #elif radio_choice == "Поп":
+            #url = pop
+            #self.dialog = radioplayer()
+            #self.dialog.show()
+        #elif radio_choice == "Рэп":
+            #url = hip_hop
+            #self.dialog = radioplayer()
+            #self.dialog.show()
+        #elif radio_choice == "Танцевальная":
+            #url = dance
+            #self.dialog = radioplayer()
+            #self.dialog.show()
+        #elif radio_choice == "Техно":
+            #url = electro
+            #self.dialog = radioplayer()
+            #self.dialog.show()
+        #elif radio_choice == "Джаз":
+            #url = jazz
+            #self.dialog = radioplayer()
+            #self.dialog.show()
+        #elif radio_choice == "Юмор":
+            #url = haha
+            #self.dialog = radioplayer()
+            #self.dialog.show()
+        #else:
+            #engine.say("Простите, я не знаю такой радиостанции.")
+            #engine.runAndWait()
             
 class OpenVasMap(QtWidgets.QWidget, map.Ui_Form):
     def __init__(self):
