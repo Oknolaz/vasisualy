@@ -44,7 +44,8 @@ python3 vasisualy-qt.py
 ### Windows
 You need to install [python3 interpreter](https://python.org). After interpreter installation install python modules via pip:
 ```
-pip install pyowm mss pyqt5_material jinja2 pyqt5-notificator pyttsx3 vlc
+pip install pyowm mss pyqt5_material jinja2 pyqt5-notificator pyttsx3 python-vlc
+ pyqtwebengine
 ```
 Next, just run the following command to launch the app:
 ```
@@ -98,7 +99,7 @@ python3 vasisualy-qt.py
 ### Windows
 Вам нужно установить [интерпретатор python3](https://python.org). После установки интерпретатора - установите необходимые модули python с помощью pip:
 ```
-pip install pyowm mss pyqt5_material jinja2 pyqt5-notificator pyttsx3 vlc
+pip install pyowm mss pyqt5_material jinja2 pyqt5-notificator pyttsx3 python-vlc pyqtwebengine
 ```
 Далее просто запустите скрипт командой:
 ```
