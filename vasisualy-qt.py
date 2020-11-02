@@ -992,7 +992,10 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow, QtWidgets.QListWid
                 cnt += 1
             cnt_speak = 0
 
-        if say == 'stop' or say == 'Stop' or say == 'Стоп' or say == 'стоп':
+        if say in ("", " ", "   ", "    "):
+            pass
+
+        elif say == 'stop' or say == 'Stop' or say == 'Стоп' or say == 'стоп':
             tts_d.stop()
     
         elif cnt == 1038:
