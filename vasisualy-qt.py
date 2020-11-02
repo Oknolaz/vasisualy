@@ -1,7 +1,4 @@
-# Тупой голосовой ассистент, который ничего не умеет версии 0.4.1
-
-from notificator import notificator
-from notificator.alingments import TopLeft
+# Тупой голосовой ассистент, который ничего не умеет версии 0.4.3
 import os
 from mss import mss
 import random
@@ -13,12 +10,9 @@ from shell import shell
 from VasQt import design
 import sys
 from PyQt5 import QtWidgets
-from VasQt import radiowindow
-from VasQt import Weather
 from pyqt5_material import apply_stylesheet
 from VasQt import map
 import wikipedia
-from VasQt import radio
 import vlc
 import geocoder
 from googletrans import Translator
