@@ -552,6 +552,15 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow, QtWidgets.QListWid
                 cnt += 1
             cnt_speak = 0
             
+        for i in launchapp:
+            if i in say:
+                self.speak("Я пока что не могу запускать программы на Microsoft Windows. Лучше установите на свой компьютер GNU/Linux.")
+                cnt_speak += 1
+                if cnt_speak == 1: break
+            else:
+                cnt += 1
+            cnt_speak = 0
+            
         for i in coin:
             if i == say:
                 random_coin = random.choice(("орёл", "решка"))
@@ -1063,7 +1072,7 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow, QtWidgets.QListWid
         elif say == 'stop' or say == 'Stop' or say == 'Стоп' or say == 'стоп':
             engine.stop()
         
-        elif cnt == 740:
+        elif cnt == 1138:
             # Фразы для ответа на несуществующие команды
             randwrong = random.choice(wrong)
             self.speak(randwrong)

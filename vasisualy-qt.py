@@ -1,7 +1,5 @@
 # Тупой голосовой ассистент, который ничего не умеет версии 0.4.1
 
-from notificator import notificator
-from notificator.alingments import TopLeft
 import os
 from mss import mss
 import random
@@ -13,12 +11,9 @@ from shell import shell
 from VasQt import design
 import sys
 from PyQt5 import QtWidgets
-from VasQt import radiowindow
-from VasQt import Weather
 from pyqt5_material import apply_stylesheet
 from VasQt import map
 import wikipedia
-from VasQt import radio
 import vlc
 import geocoder
 from googletrans import Translator
@@ -248,7 +243,7 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow, QtWidgets.QListWid
         for i in life:
             if i in say:
                 # Рассказ о себе
-                self.speak("Я умею говорить время, рассказать анекдот, сделать снимок экрана, рассказать о текущей погоде, включить радио в выбранном жанре, открыть браузер, искать ответ на ваш вопрос в интернете, выключить и перезагрузить компьютер, запустить любую программу на вашем компьютере, подкинуть монетку, повторить за вами любую фразу, прочитать стих, сказать Вам где Вы находитесь и сказать скороговорку, но, надеюсь, что скоро смогу намного больше.")
+                self.speak("Я умею говорить время, рассказать анекдот, сделать снимок экрана, рассказать о текущей погоде, включить радио в выбранном жанре, открыть браузер, искать ответ на ваш вопрос в интернете, выключить и перезагрузить компьютер, запустить любую программу на вашем компьютере, подкинуть монетку, повторить за вами любую фразу, прочитать стих, сказать Вам где Вы находитесь, сказать скороговорку и перевести текст с любого языка на русский, английский, немецкий, французский, португальский, испанский и украинский, но, надеюсь, что скоро смогу намного больше.")
                 cnt_speak += 1
                 if cnt_speak == 1: break
             else:
@@ -1096,14 +1091,14 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow, QtWidgets.QListWid
             else:
                 cnt += 1
             cnt_speak = 0
-            
+        
         if say in ("", " ", "   ", "    "):
             pass
 
         elif say == 'stop' or say == 'Stop' or say == 'Стоп' or say == 'стоп':
             tts_d.stop()
-    
-        elif cnt == 1038:
+
+        elif cnt == 1138:
             # Фразы для ответа на несуществующие команды
             randwrong = random.choice(wrong)
             self.speak(randwrong)
