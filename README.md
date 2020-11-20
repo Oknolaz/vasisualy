@@ -33,16 +33,16 @@ Clone this repo with Git and go to the directory:
 git clone https://github.com/Oknolaz/vasisualy
 cd vasisualy
 ```
-After these steps, just run the script in the terminal with this command for voice input:
-```
-python3 vasisualy-voice.py
-```
-For GUI Qt version:
+After these steps, just run the script in the terminal with this command for Qt GUI version without speech recognition:
 ```
 python3 vasisualy-qt.py
 ```
+For CLI version with speech recognition, adapted for single board computers:
+```
+python3 vasisualy-pi.py
+```
 ### Windows
-You need to install [python3 interpreter](https://python.org). After interpreter installation install python modules via pip:
+You need to install [python3 interpreter](https://python.org) and [VLC media player](https://videolan.org/). After that install python modules via pip:
 ```
 pip install pyowm mss pyqt5_material jinja2 pyqt5-notificator pyttsx3 python-vlc
  pyqtwebengine
@@ -88,16 +88,16 @@ pip3 install pyowm shell mss pyqt5_material pyqt5-notificator jinja2
 git clone https://github.com/Oknolaz/vasisualy
 cd vasisualy
 ```
-После этих действий можно запускать скрипт этой командой для голосового ввода:
-```
-python3 voice.py
-```
-Для версии с GUI:
+После этих действий можно запускать скрипт этой командой для Qt GUI версии без распознавания речи:
 ```
 python3 vasisualy-qt.py
 ```
+Для CLI версии с распознаванием речи, адаптированной для одноплатных компьютеров (Raspberry Pi, Orange Pi и др.):
+```
+python3 vasisualy-pi.py
+```
 ### Windows
-Вам нужно установить [интерпретатор python3](https://python.org). После установки интерпретатора - установите необходимые модули python с помощью pip:
+Вам нужно установить [интерпретатор python3](https://python.org) и [VLC media player](https://videolan.org/). После установки интерпретатора - установите необходимые модули python с помощью pip:
 ```
 pip install pyowm mss pyqt5_material jinja2 pyqt5-notificator pyttsx3 python-vlc pyqtwebengine
 ```
