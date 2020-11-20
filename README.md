@@ -106,3 +106,7 @@ pip install pyowm mss pyqt5_material jinja2 pyqt5-notificator pyttsx3 python-vlc
 python vasisualy-win.py
 ```
 Поздравляю Вас! :+1:
+
+## Обратная связь
+Telegram: @oknolaz_dev
+matrix.org: @oknolaz
