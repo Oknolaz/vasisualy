@@ -20,13 +20,19 @@ Then run the executable file vasisualy-install in your graphical environment or 
 Just follow the instructions and enter your password every time you are asked, otherwise the installation will fail.
 ## Getting Started
 ### GNU/Linux
-First, to run this script, you need to install the [RHVoice](https://github.com/Olga-Yakovleva/RHVoice/) speech synthesizer. Then you need to install the speechd module for python, PyQt5 and VLC player using package manager for your distribution (like apt):
+First, to run this script, you need to install the [RHVoice](https://github.com/Olga-Yakovleva/RHVoice/) speech synthesizer (for Ubuntu):
+```
+sudo add-apt-repository ppa:linvinus/rhvoice
+sudo apt-get update
+sudo apt-get install rhvoice
+```
+Then you need to install the speechd module for python, PyQt5 and VLC player using package manager for your distribution (like apt):
 ```
 sudo apt-get install python3-speechd python3-pyqt5 python3-pyqt5.qtwebengine python3-vlc
 ```
 Next, you need to install the necessary modules via pip:
 ```
-pip3 install pyowm shell mss pyqt5_material pyqt5-notificator jinja2
+pip3 install pyowm shell mss pyqt5_material pyqt5-notificator jinja2 wikipedia geocoder googletrans
 ```
 Clone this repo with Git and go to the directory:
 ```
@@ -45,7 +51,7 @@ python3 vasisualy-pi.py
 You need to install [python3 interpreter](https://python.org) and [VLC media player](https://videolan.org/). After that install python modules via pip:
 ```
 pip install pyowm mss pyqt5_material jinja2 pyqt5-notificator pyttsx3 python-vlc
- pyqtwebengine
+ pyqtwebengine wikipedia geocoder googletrans
 ```
 Next, just run the following command to launch the app:
 ```
@@ -75,13 +81,19 @@ cd vasisualy-installer
 Просто следуйте инструкциям и вводите пароль каждый раз, когда вас спросят, иначе установка не произойдёт.
 ## Запуск без установки
 ### GNU/Linux
-Для начала Вам понадобится установить синтезатор речи [RHVoice](https://github.com/Olga-Yakovleva/RHVoice/). Затем нужно нужно установить модуль speechd для Python, PyQt5 и VLC плеер с помощью менеджера пакетов в вашем дистрибутиве (например apt):
+Для начала Вам понадобится установить синтезатор речи [RHVoice](https://github.com/Olga-Yakovleva/RHVoice/) (для Ubuntu):
+```
+sudo add-apt-repository ppa:linvinus/rhvoice
+sudo apt-get update
+sudo apt-get install rhvoice
+```
+Затем нужно нужно установить модуль speechd для Python, PyQt5 и VLC плеер с помощью менеджера пакетов в вашем дистрибутиве (например apt):
 ```
 sudo apt-get install python3-speechd python3-pyqt5 vlc python3-pyqt5.qtwebengine
 ```
 Далее необходимо установить другие модули с помощью pip:
 ```
-pip3 install pyowm shell mss pyqt5_material pyqt5-notificator jinja2
+pip3 install pyowm shell mss pyqt5_material pyqt5-notificator jinja2 wikipedia geocoder googletrans
 ```
 Клонируйте данный репозиторий с помощью Git:
 ```
@@ -99,7 +111,7 @@ python3 vasisualy-pi.py
 ### Windows
 Вам нужно установить [интерпретатор python3](https://python.org) и [VLC media player](https://videolan.org/). После установки интерпретатора - установите необходимые модули python с помощью pip:
 ```
-pip install pyowm mss pyqt5_material jinja2 pyqt5-notificator pyttsx3 python-vlc pyqtwebengine
+pip install pyowm mss pyqt5_material jinja2 pyqt5-notificator pyttsx3 python-vlc pyqtwebengine wikipedia geocoder googletrans
 ```
 Далее просто запустите скрипт командой:
 ```
