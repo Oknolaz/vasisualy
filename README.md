@@ -24,7 +24,7 @@ First, to run this script, you need to install the [RHVoice](https://github.com/
 ```
 sudo add-apt-repository ppa:linvinus/rhvoice
 sudo apt-get update
-sudo apt-get install rhvoice
+sudo apt-get install speech-dispatcher-rhvoice rhvoice-russian
 ```
 Then you need to install the speechd module for python, PyQt5 and VLC player using package manager for your distribution (like apt):
 ```
@@ -85,7 +85,7 @@ cd vasisualy-installer
 ```
 sudo add-apt-repository ppa:linvinus/rhvoice
 sudo apt-get update
-sudo apt-get install rhvoice
+sudo apt-get install speech-dispatcher-rhvoice rhvoice-russian
 ```
 Затем нужно нужно установить модуль speechd для Python, PyQt5 и VLC плеер с помощью менеджера пакетов в вашем дистрибутиве (например apt):
 ```
