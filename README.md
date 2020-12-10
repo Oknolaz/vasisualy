@@ -1,23 +1,6 @@
 # Vasisualy voice assistant :+1:
 Vasisualy it's a simple russian voice assistant written on python 3 for GNU/Linux and Windows. 
 Vasisualy can tell the current time, tell about himself, make a funny story, tell about the weather, turn on music, open a browser, take screenshot, found your question in the web and send you to hell. Script supported only russian language.
-## Automatic installation for Debian
-### Installer work only on Debian/Ubuntu distros!
-For automatic graphical installation, download the archive with the installer from the [Releases](https://github.com/Oknolaz/vasisualy/releases) page.
-![Image alt](https://github.com/Oknolaz/vasisualy/blob/master/install.png)
-Unpack the folder inside it to your home directory. It should look like this: /home/user/vasisualy-installer/. This can be done with the command:
-```
-tar -xf vasisualy-installer.tar.bz2
-```
-Change to the directory that appears:
-```
-cd vasisualy-installer
-```
-Then run the executable file vasisualy-install in your graphical environment or with the command:
-```
-./vasisualy-install
-```
-Just follow the instructions and enter your password every time you are asked, otherwise the installation will fail.
 ## Getting Started
 ### GNU/Linux
 First, to run this script, you need to install the [RHVoice](https://github.com/Olga-Yakovleva/RHVoice/) speech synthesizer (for Ubuntu):
@@ -62,24 +45,7 @@ Congratulations! :+1:
 # Голосовой ассистент Васисуалий :+1:
 Васисуалий - это простой голосовой ассистент, написанный на Python 3 для GNU/Linux и Windows.
 Васисуалий может рассказать Вам текущее время, сказать о себе пару слов, заставить Вас смеяться от его смешных анекдотов, рассказать о текущей погоде в любом городе мира, включить любую вашу музыку, открыть браузер, сделать скриншот, искать заданный вопрос в интернете или послать Вас очень далеко за оскорбления. Программа поддерживает только русский язык.
-## Автоматический установщик для Debian
-### Установщик работает только на дистрибутивах Debian и их производных (Ubuntu)!
-Для автоматической графической установки необходимо загрузить архив с установщиком со страницы [Releases](https://github.com/Oknolaz/vasisualy/releases).
-![Image alt](https://github.com/Oknolaz/vasisualy/blob/master/install.png)
-Распакуйте папку, находящуюся внутри него в домашнюю директорию. Должно получиться так: /home/user/vasisualy-installer/. Это можно сделать командой:
-```
-tar -xf vasisualy-installer.tar.bz2
-```
-Перейдите в появившуюся директорию:
-```
-cd vasisualy-installer 
-```
-Далее запустите исполняемый файл vasisualy-install в своей графической среде или командой:
-```
-./vasisualy-install
-```
-Просто следуйте инструкциям и вводите пароль каждый раз, когда вас спросят, иначе установка не произойдёт.
-## Запуск без установки
+## Начало работы
 ### GNU/Linux
 Для начала Вам понадобится установить синтезатор речи [RHVoice](https://github.com/Olga-Yakovleva/RHVoice/) (для Ubuntu):
 ```
