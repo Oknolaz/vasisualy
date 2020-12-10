@@ -1,6 +1,28 @@
 # Vasisualy voice assistant :+1:
 Vasisualy it's a simple russian voice assistant written on python 3 for GNU/Linux and Windows. 
 Vasisualy can tell the current time, tell about himself, make a funny story, tell about the weather, turn on music, open a browser, take screenshot, found your question in the web and send you to hell. Script supported only russian language.
+## Vasisualy can:
+- Tell the current date and time.
+- Tell a joke.
+- Tell about the current weather in any city.
+- Turn on the radio (hip-hop, pop, rock, dance, etc.).
+- Open browser, web site (like YouTube).
+- Launch the app installed on your PC.
+- Make a screenshot.
+- Search for information on the Internet.
+- Shutdown or reboot your PC.
+- Search for videos on YouTube.
+- Repeat your words like a parrot.
+- Flip a coin.
+- Say a tongue twister.
+- Launch OpenStreetMap.
+- Find answer for your question on [Wikipedia](https://wikipedia.org/).
+- Tell where you are.
+- Translate any text from all languages to Russian, Spanish, Deutch, English, Francais and other.
+- Tell news from [Wikinews](https://wikinews.org/).
+- Play Guess the number game and Russian roulette with you.
+- Communicate primitively.
+- And more...
 ## Getting Started
 ### GNU/Linux
 First, to run this script, you need to install the [RHVoice](https://github.com/Olga-Yakovleva/RHVoice/) speech synthesizer (for Ubuntu):
@@ -43,8 +65,29 @@ python vasisualy-win.py
 Congratulations! :+1:
 
 # Голосовой ассистент Васисуалий :+1:
-Васисуалий - это простой голосовой ассистент, написанный на Python 3 для GNU/Linux и Windows.
-Васисуалий может рассказать Вам текущее время, сказать о себе пару слов, заставить Вас смеяться от его смешных анекдотов, рассказать о текущей погоде в любом городе мира, включить любую вашу музыку, открыть браузер, сделать скриншот, искать заданный вопрос в интернете или послать Вас очень далеко за оскорбления. Программа поддерживает только русский язык.
+Васисуалий - это простой свободный голосовой ассистент, уважающий вашу свободу, для GNU/Linux и Windows. Поддерживается только русский язык.
+## Васисуалий может:
+- Сказать текущую дату и время.
+- Рассказать анекдот.
+- Сказать о текущей погоде в любом городе мира.
+- Включить радио (хип-хоп, поп, рок, техно и др.).
+- Открыть браузер или веб-сайт (например, YouTube).
+- Запустить программу, установленную на вашем ПК.
+- Сделать снимок экрана.
+- Искать информацию в Итернете.
+- Выключить или перезагрузить компьютер.
+- Искать видео на YouTube.
+- Повторять ваши слова, как попугай.
+- Подкинуть монетку.
+- Сказать скороговорку.
+- Открыть карты (OpenStreetMap)
+- Искать ответ на ваш вопрос в [Википедии](https://wikipedia.org).
+- Сказать где вы.
+- Перевести текст с любого языка на русский, испанский, английский, французский, итальянский и др..
+- Рассказать новости с [Wikinews](https://wikinews.org/).
+- Сыграть в Угадай число и Русскую рулетку с вами.
+- Примитивно общаться.
+- И многое другое...
 ## Начало работы
 ### GNU/Linux
 Для начала Вам понадобится установить синтезатор речи [RHVoice](https://github.com/Olga-Yakovleva/RHVoice/) (для Ubuntu):
