@@ -9,7 +9,7 @@ from pyowm.utils.config import get_default_config
 from VasQt import design
 import sys
 from PyQt5 import QtWidgets
-from pyqt5_material import apply_stylesheet
+from qt_material import apply_stylesheet
 from VasQt import map
 import wikipedia
 import webbrowser
