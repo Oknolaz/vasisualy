@@ -24,8 +24,6 @@ cnt_speak = 0
 now = datetime.datetime.now() # Получение текущего времени
 wikipedia.set_lang("ru")
 engine = pyttsx3.init()
-voice = engine.getProperty('voices')
-engine.setProperty('voice', voice[4].id)
 geo = geocoder.ip('me')
 translator = Translator()
 inst = vlc.Instance()
