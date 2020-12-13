@@ -37,7 +37,7 @@ sudo apt-get install python3-speechd python3-pyqt5 python3-pyqt5.qtwebengine pyt
 ```
 Next, you need to install the necessary modules via pip:
 ```
-pip3 install pyowm shell mss qt-material pyqt5-notificator jinja2 wikipedia geocoder googletrans
+pip3 install pyowm shell mss qt-material jinja2 wikipedia geocoder googletrans lxml beautifulsoup4
 ```
 Clone this repo with Git and go to the directory:
 ```
@@ -55,8 +55,8 @@ python3 vasisualy-pi.py
 ### Windows
 You need to install [python3 interpreter](https://python.org) and [VLC media player](https://videolan.org/). After that install python modules via pip:
 ```
-pip install pyowm mss qt-material jinja2 pyqt5-notificator pyttsx3 python-vlc
- pyqtwebengine wikipedia geocoder googletrans
+pip install pyowm mss qt-material jinja2 pyttsx3 python-vlc
+ pyqtwebengine wikipedia geocoder googletrans beautifulsoup4 lxml
 ```
 Next, just run the following command to launch the app:
 ```
@@ -102,7 +102,7 @@ sudo apt-get install python3-speechd python3-pyqt5 vlc python3-pyqt5.qtwebengine
 ```
 Далее необходимо установить другие модули с помощью pip:
 ```
-pip3 install pyowm shell mss qt-material pyqt5-notificator jinja2 wikipedia geocoder googletrans
+pip3 install pyowm shell mss qt-material jinja2 wikipedia geocoder googletrans beautifulsoup4 lxml
 ```
 Клонируйте данный репозиторий с помощью Git:
 ```
@@ -120,7 +120,7 @@ python3 vasisualy-pi.py
 ### Windows
 Вам нужно установить [интерпретатор python3](https://python.org) и [VLC media player](https://videolan.org/). После установки интерпретатора - установите необходимые модули python с помощью pip:
 ```
-pip install pyowm mss qt-material jinja2 pyqt5-notificator pyttsx3 python-vlc pyqtwebengine wikipedia geocoder googletrans
+pip install pyowm mss qt-material jinja2 pyttsx3 python-vlc pyqtwebengine wikipedia geocoder googletrans beautifulsoup4 lxml
 ```
 Далее просто запустите скрипт командой:
 ```
