@@ -6,17 +6,18 @@ import random
 import datetime
 from pyowm.owm import OWM
 from pyowm.utils.config import get_default_config
-from VasQt import design
+from ui import design
 import sys
 from PyQt5 import QtWidgets
 from qt_material import apply_stylesheet
-from VasQt import map
+from ui import map
 import wikipedia
 import webbrowser
 import vlc
 import geocoder
 from googletrans import Translator
 import subprocess
+import speech_recognition
 
 config_dict = get_default_config()
 config_dict['language'] = 'ru'
@@ -30,8 +31,14 @@ inst = vlc.Instance()
 player=inst.media_player_new()
 is_paused = False
 isGuessNum = False
-isRoulette = False
 guesstry = 0
+isInMusicDir = False
+musicIsPlayed = False
+
+# Настройки распознавания речи
+recognizer = speech_recognition.Recognizer()
+recognizer.pause_threshold = 0.5
+mph = speech_recognition.Microphone()
 
 time = ("время", "Время", "Который час", "который час", "подскажи время", "Подскажи время", "Сколько время", "сколько время", "Сколько времени", "сколько времени", "час", "Час", "дата", "Дата", "Какой месяц", "какой месяц", "Какая неделя", "какая неделя", "Какой день", "какой день") # Команды времени
 
@@ -187,6 +194,14 @@ russian_roulette = ("Русская рулетка", "русская рулет�
 
 notes = ("Напомни мне", "напомни мне", "Сделай заметку", "сделай заметку")
 
+turnonpc = ("Включи пк", "включи пк", "Включи компьютер", "включи компьютер")
+
+boring = ("Мне скучно", "мне скучно", "Мне очень скучно", "мне очень скучно", "Умираю от скуки", "умираю от скуки", "Мне нечего делать", "мне нечего делать", "Мне надоело", "мне надоело", "Мне нечем заняться", "мне нечем заняться")
+
+onlyBoring = ("Скучно", "Очень скучно", "Скука", "Скукота", "Скукотища", "Нечего делать", "Нечем заняться", "Надоело")
+
+nextSong = ("Следующий трек", "Следующая песня", "Следующая музыка", "Следующее воспроизведение", "Следующий")
+
 
 class OpenVasMap(QtWidgets.QWidget, map.Ui_Form):
     def __init__(self):
@@ -199,9 +214,12 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow, QtWidgets.QListWid
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        print("[sys] ТИХО!..")
+        with mph as source:
+            recognizer.adjust_for_ambient_noise(source)
         self.lineEdit.setFocus()
         self.lineEdit.editingFinished.connect(self.vasmsg)
-        self.pushButton.clicked.connect(self.vasmsg)
+        self.pushButton.clicked.connect(self.recognise)
         self.speak("Приветствую Вас. Меня зовут Васисуалий. Чем могу быть полезен?")
         
     def speak(self, string):
@@ -215,7 +233,7 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow, QtWidgets.QListWid
         # Сама программа
         cnt = 0
         cnt_speak = 0
-        say = self.lineEdit.text()
+        say = self.say.capitalize()
         if say == '' or say == ' ':
             pass
         else:
@@ -436,16 +454,16 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow, QtWidgets.QListWid
                         media=inst.media_new(radiostation)
                         player.set_media(media)
                         player.play()
-                    else:
-                        if is_paused:
-                            player.play()
-                        else:
-                            self.speak("Пожалуйста укажи жанр музыки, который ты хочешь прослушать.")
+                    elif radiostation == '':
+                        self.speak("Включаю музыку из твоей папки. Если хочешь слушать радио - то скажи \"включи (жанр) музыку\".")
+                        self.playFromDir()
+                    elif say in stop_music:
+                        pass
                 except Exception:
                     if say in stop_music:
                         pass
                     else:
-                        self.speak("Я не могу включить данную радиостанцию. Проверь подключение к интернету")
+                        self.speak("Не удалось воспроизвести музыку.")
             else:
                 cnt += 1
             cnt_speak = 0
@@ -483,6 +501,10 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow, QtWidgets.QListWid
                 for game in ("Игру", "игру", "Игра", "игра", "Игрушку", "игрушку", "Игрушка", "игрушка", "Майнкрафт", "майнкрафт", "Манкрафт", "манкрафт", "Манкруфт", "манкруфт"):
                     if game in say:
                         self.speak("Я не могу включать тебе игры. Сам включай!")
+                        
+                for appStore in ("Центр программ", "центр программ", "аппстор", "апстор", "ап стор", "аппсторе", "апсторе", "ап сторе", "апп стор", "апп сторе", "эппстор", "эппсторе", "эпп стор", "эпп сторе", "эпстор", "эпсторе", "эп стор", "эп сторе", "Центр приложений", "центр приложений", "Магазин программ", "магазин программ", "Магазин приложений", "магазин приложений", "Установщик программ", "установщик программ", "Установщик приложений", "установщик приложений", "Софтвэйр", "софтвэйр", "Софтвар", "софтвар", "Софтваре", "софтваре", "Software", "software"):
+                    if appStore in say:
+                        self.speak("Эта функция не работает на Microsoft Windows!")
                         
                 try:
                     app = say.replace(i, '')
@@ -932,19 +954,19 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow, QtWidgets.QListWid
                     w = observation.weather
                     self.speak("В " + weather_city + " сейчас " + str(w.temperature('celsius')['temp']) + " градусов по цельсию, " + w.detailed_status + ".")
                     if float(w.temperature('celsius')['temp']) >= 20:
-                        tts_d.speak("Сейчас на улице жарко. Идите загорать.")
+                        self.speak("Сейчас на улице жарко. Идите загорать.")
                     elif float(w.temperature('celsius')['temp']) <= 19 and float(w.temperature('celsius')['temp']) >= 10:
-                        tts_d.speak("За окном прохладно. Оденьте куртку.")
+                        self.speak("За окном прохладно. Оденьте куртку.")
                     elif float(w.temperature('celsius')['temp']) <= 9 and float(w.temperature('celsius')['temp']) >= 0:
-                        tts_d.speak("На улице холодно. Оденьтесь в осеннюю одежду.")
+                        self.speak("На улице холодно. Оденьтесь в осеннюю одежду.")
                     else:
-                        tts_d.speak("На улице очень холодно, лучше туда не ходить. Выпейте горячего чаю.")
+                        self.speak("На улице очень холодно, лучше туда не ходить. Выпейте горячего чаю.")
                 except Exception:
                     self.speak("Пожалуйста, укажите название города!")
                     
         for i in aboutprogram:
             if i == say:
-                self.speak("Vasisualy - свободное программное обеспечение, распространяемое по лицензии GNU GPL v3.0.\nАвторы:\nOknolaz - разработка и тестирование на GNU/Linux.\nGrigor'ery - тестирование в Windows.")
+                self.speak("Vasisualy - свободное программное обеспечение, распространяемое по лицензии GNU GPL v3.0.")
                 
         for i in unotbot:
             if i in say:
@@ -1165,7 +1187,7 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow, QtWidgets.QListWid
                 
         for i in play:
             if i in say:
-                self.speak("У меня пока есть только одна игра - Угадай число. Если хочешь в неё поиграть скажи: Угадай число.")
+                self.speak("У меня пока есть только две игры: Угадай число и Русская рулетка.")
                 cnt_speak += 1
                 if cnt_speak == 1: break
             else:
@@ -1183,7 +1205,7 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow, QtWidgets.QListWid
                     cnt_parse = 0
                     for head in heads:
                         if cnt_parse < 5:
-                            list_news.append(head.string)
+                            list_news.append(head.string + ".")
                             cnt_parse += 1
                     self.speak("Вот, что сегодня нового: ")
                     for new in list_news:
@@ -1305,6 +1327,40 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow, QtWidgets.QListWid
                             self.speak(f"Я понял, напомню тебе {note} в {note_time}")
                         else:
                             self.speak("Назови время, когда тебе нужно это напомнить!")
+                            
+        for i in turnonpc:
+            if i in say:
+                Aturnonpc = random.choice(("Ты что дурачок? Компьютер уже включен.", "Он уже включен.", "Не тормози, товарищ, компьютер уже включен.", "Так делать нельзя.", "Нет, я не могу так сделать.", "Невозможно включить то, что уже включено.", "Компьютер включен."))
+                self.speak(Aturnonpc)
+                cnt_speak += 1
+                if cnt_speak == 1: break
+            else:
+                cnt += 1
+            cnt_speak = 0
+            
+        for i in boring:
+            if i in say:
+                Aboring = random.choice(("Знаешь, как можно развлечься? Налей в сковороду масло, доведи его до состояния кипения, и... налей туда воды. Будет очень весело!", "Может мне отключиться? Уже надоело слушать твоё нытьё!", "Хватит ныть! Лучше станцуй, может быть, тогда ты развеселишься. Музыку я включу, за это не беспокойся.", "Эх, если б были руки, врезал бы тебе за твои вопли.", "Мне не понятны ваши эмоции.", "Послушай, не унывай, а то я сейчас отформатирую жёсткий диск, и у тебя появится ещё одна проблема.", "Зачем ты так страдаешь?"))
+                self.speak(Aboring)
+                self.already_speak = True
+                cnt_speak += 1
+                if cnt_speak == 1: break
+            else:
+                cnt += 1
+            cnt_speak = 0
+            
+        for i in onlyBoring:
+            if i == say:
+                if self.already_speak:
+                    pass
+                else:
+                    Aboring = random.choice(("Знаешь, как можно развлечься? Налей в сковороду масло, доведи его до состояния кипения, и... налей туда воды. Будет очень весело!", "Может мне отключиться? Уже надоело слушать твоё нытьё!", "Хватит ныть! Лучше станцуй, может быть, тогда ты развеселишься. Музыку я включу, за это не беспокойся.", "Эх, если б были руки, врезал бы тебе за твои вопли.", "Мне не понятны ваши эмоции.", "Послушай, не унывай, а то я сейчас отформатирую жёсткий диск, и у тебя появится ещё одна проблема.", "Зачем ты так страдаешь?"))
+                    self.speak(Aboring)
+                    
+        for i in nextSong:
+            if i == say:
+                self.speak("Переключаю...")
+                self.playFromDir()
         
         if say in ("", " ", "   ", "    "):
             pass
@@ -1361,7 +1417,7 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow, QtWidgets.QListWid
         elif say == 'stop' or say == 'Stop' or say == 'Стоп' or say == 'стоп':
             engine.stop()
         
-        elif cnt == 1258:
+        elif cnt == 1274:
             # Фразы для ответа на несуществующие команды
             randwrong = random.choice(wrong)
             self.speak(randwrong)
@@ -1375,13 +1431,47 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow, QtWidgets.QListWid
         
     def vasmsg(self):
         # Функция берёт переданный в виджет lineEdit текст, очищает виджет и запускает программу
-        say = self.lineEdit.text()
-        self.program()
+        self.say = self.lineEdit.text()
         self.lineEdit.clear()
+        self.listWidget.scrollToBottom()
+        self.say.capitalize()
+        self.program()
         
     def show_dialog(self):
         # Функция для показа любого дополнительного окна
         self.dialog.show()
+        
+    def playFromDir(self):
+        global musicIsPlayed, isInMusicDir
+        if isInMusicDir:
+            pass
+        else:
+            os.chdir("./music/")
+            isInMusicDir = True
+        playlist = os.listdir()
+        if musicIsPlayed:
+            self.usrPlayer.stop()
+            self.usrPlayer = vlc.MediaPlayer(random.choice(playlist))
+            self.usrPlayer.play()
+        else:
+            self.usrPlayer = vlc.MediaPlayer(random.choice(playlist))
+            self.usrPlayer.play()
+            musicIsPlayed = True
+            
+    def recognise(self):
+        global mph, recognizer
+        print("[sys] Говорите...")
+        with mph as source:
+            self.say = recognizer.listen(source)
+        print("[sys] Речь распознаётся...")
+        try:
+            self.say = recognizer.recognize_google(self.say, language="ru-RU")
+            self.say = self.say.capitalize()
+        except Exception:
+            self.say = ''
+            print("[sys] Не удалось распознать речь. Нет подключения к интернету или не подключен микрофон.")
+            self.speak("Речь не распознана.")
+        self.program()
         
 def main():
     app = QtWidgets.QApplication(sys.argv)
