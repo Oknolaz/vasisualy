@@ -1,6 +1,6 @@
 # Vasisualy voice assistant :+1:
 Vasisualy it's a simple russian voice assistant written on python 3 for GNU/Linux and Windows. 
-Vasisualy can tell the current time, tell about himself, make a funny story, tell about the weather, turn on music, open a browser, take screenshot, found your question in the web and send you to hell. Script supported only russian language.
+Vasisualy can tell the current time, tell about himself, make a funny story, tell about the weather, turn on music, open a browser, take screenshot, found your question in the web and send you to hell.
 ## Vasisualy can:
 - Tell the current date and time.
 - Tell a joke.
