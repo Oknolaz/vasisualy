@@ -12,6 +12,7 @@ import geocoder
 from googletrans import Translator
 import subprocess
 import speech_recognition
+import mss
 
 config_dict = get_default_config()
 config_dict['language'] = 'ru'
@@ -204,6 +205,8 @@ onlyBoring = ("Скучно", "Очень скучно", "Скука", "Скук
 
 nextSong = ("Следующий трек", "Следующая песня", "Следующая музыка", "Следующее воспроизведение", "Следующий")
 
+excludeList = ("Васисуалий", "Васисуали", "васисуалий", "васисуали", "Васян", "васян", "Васёк", "васёк", "Васися", "васися", "Васисяндра", "васисяндра", "Васька", "васька", "Вася", "вася", "Василий", "василий", "Пожалуйста", "пожалуйста")
+
 calculator = ("Плюс", "плюс", "Минус", "минус", "Разделить", "разделить", "Умножить", "умножить", " + ", "+", " - ", " / ", "/", " : ", ":", " * ", "*")
         
 
@@ -293,6 +296,8 @@ class MainVas():
                 if i in say:
                     weather_city = say.replace(i, '')
                     weather_city = weather_city.replace(' ', '')
+                    for toExclude in excludeList:
+                        weather_city = weather_city.replace(toExclude, '')
                     without_browser = True
                     try:
                         id = OWM('e45bc007f87a48d597d60091779f2d88', config_dict) # API ключ Open weather map
@@ -510,6 +515,8 @@ class MainVas():
                     try:
                         app = say.replace(i, '')
                         app = app.replace(' ', '')
+                        for toExclude in excludeList:
+                            app = app.replace(toExclude, '')
                         subprocess.run(app)
                         tts_d.speak(f"Я открыл {app}")
                     except Exception:
@@ -524,12 +531,9 @@ class MainVas():
             for i in screen:
                 if i in say:
                     self.speak("Я сделал снимок экрана.")
-                    who = shell('whoami') # Ввод команды whoami в терминале
-                    who = who.output()[0] # Присвоение переменой имени текущего пользователя
-                    os.chdir(f"/home/{who}/") # Смена директории на домашнюю для данного пользователя
                     try:
                         with mss() as sct:
-                            sct.shot() # Создание скриншота в файл monitor-1.png в домашней директории
+                            sct.shot() # Создание скриншота в файл monitor-1.png
                     except Exception:
                         self.speak("Я не могу этого сделать. Мне нужен дисплей и установленное в системе окружение рабочего стола.")
                     cnt_speak += 1
@@ -598,6 +602,8 @@ class MainVas():
             for i in search:
                 if i in say:
                     try:
+                        for toExclude in excludeList:
+                            say = say.replace(toExclude, '')
                         self.speak("Сейчас найду.")
                         subprocess.run(f"x-www-browser 'https://duckduckgo.com/{say}'") # Поиск данного запроса в интернетах
                     except Exception:
@@ -638,6 +644,8 @@ class MainVas():
             for i in video:
                 if i in say:
                     video_search = say.replace(i, '')
+                    for toExclude in excludeList:
+                        video_search = video_search.replace(toExclude, '')
                     try:
                         self.speak(f'Ищу видео {video_search}.')
                         subprocess.run(["x-www-browser", f"https://www.youtube.com/results?search_query={video_search}"])
@@ -678,6 +686,8 @@ class MainVas():
             for i in vas_say:
                 if i in say:
                     hesay = say.replace(i, "")
+                    for toExclude in excludeList:
+                        hesay = hesay.replace(toExclude, '')
                     self.speak(hesay)
                     cnt_speak += 1
                     if cnt_speak == 1: break
@@ -770,6 +780,8 @@ class MainVas():
             for i in where:
                 if i in say:
                     loc_name = say.replace(i, '')
+                    for toExclude in excludeList:
+                        loc_name = loc_name.replace(toExclude, '')
                     loc_say = random.choice((f"{loc_name} там.", f"{loc_name} находится там.", f"{loc_name} где-то там.", f"{loc_name} рядом со мной.", f"{loc_name} у тебя за спиной.", f"{loc_name} в 300 метрах от тебя.", f"{loc_name} очень далеко...", f"Я незнаю где находится{loc_name}.", f"{loc_name} где-то здесь.", f"{loc_name} находится в \"Середина траханья нигде\".", f"{loc_name} недалеко от тебя.", "Я незнаю.", "Я что похож на навигатор!?", "Я не карта!", "Я не умею пользоваться картой. На данный момент.", "Я ЧТО ПОХОЖ НА КАРТУ!?", "НЕ НАДО СЧИТАТЬ МЕНЯ НАВИГАТОРОМ!"))
                     self.speak(loc_say)
                     cnt_speak += 1
@@ -830,6 +842,8 @@ class MainVas():
             for i in qwiki:
                 if i in say:
                     question = say.replace(i, " ")
+                    for toExclude in excludeList:
+                        question = question.replace(toExclude, '')
                     if question == "" or question == " " or question == "  ":
                         self.speak("Я не могу ответить на отсутствующий вопрос! Задайте вопрос!")
                     else:
@@ -1000,6 +1014,8 @@ class MainVas():
             for i in translate:
                 if i in say:
                     trans_text = say.replace(i, ' ')
+                    for toExclude in excludeList:
+                        trans_text = trans_text.replace(toExclude, '')
                     lang = translator.detect(trans_text)
                     lang = lang.lang
                     isTranslated = False
@@ -1293,6 +1309,8 @@ class MainVas():
             for i in notes:
                 if i in say:
                     note = say.replace(i, '')
+                    for toExclude in excludeList:
+                        note = note.replace(toExclude, '')
                     toExclude = ("в один час", "в 1 час", "в час", "в два часа", "в 2 часа", "в три часа", "в 3 часа", "в четыре часа", "в 4 часа", "в пять часов", "в 5 часов", "в шесть часов", "в 6 часов", "в семь часов", "в 7 часов", "в восемь часов", "в 8 часов", "в девять часов", "в 9 часов", "в десять часов", "в 10 часов", "в одиннадцать часов", "в 11 часов", "в двенадцать часов", "в 12 часов")
                     for exclude in toExclude:
                         if exclude in say:
