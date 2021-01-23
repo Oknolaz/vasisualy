@@ -13,6 +13,7 @@ from googletrans import Translator
 import subprocess
 import speech_recognition
 import mss
+import webbrowser
 
 config_dict = get_default_config()
 config_dict['language'] = 'ru'
@@ -477,17 +478,17 @@ class MainVas():
                         if net in say:
                             try:
                                 # Открытие браузера по умолчанию с помощью терминала
-                                tts_d.speak("Я открыл браузер.")
-                                subprocess.run('x-www-browser')
-                            except Exception:
-                                self.speak("Не удалось открыть веб-браузер")
+                                self.speak("Открываю браузер...")
+                                webbrowser.open_new_tab('')
+                            except webbrowser.Error:
+                                self.speak("Не удалось открыть веб-браузер.")
                                 
                     for yt in ("Youtube", "youtube", "Ютуб", "ютуб", "Ютьюб", "ютьюб", "Ютюб", "ютюб", "Утуб", "утуб"):
                         if yt in say:
                             try:
-                                tts_d.speak("Открываю YouTube.")
-                                shell(f"x-www-browser 'https://youtube.com/'")
-                            except Exception:
+                                self.speak("Открываю YouTube...")
+                                webbrowser.open_new_tab('https://youtube.com/')
+                            except webbrowser.Error:
                                 self.speak("Не удалось открыть YouTube.")
                                 
                     for win in ("Окно", "окно", "Окошко", "окошко", "Дверь", "дверь", "Замок", "замок"):
@@ -605,8 +606,9 @@ class MainVas():
                         for toExclude in excludeList:
                             say = say.replace(toExclude, '')
                         self.speak("Сейчас найду.")
-                        subprocess.run(f"x-www-browser 'https://duckduckgo.com/{say}'") # Поиск данного запроса в интернетах
-                    except Exception:
+                        # Поиск данного запроса в интернетах
+                        webbrowser.open_new_tab(f"https://duckduckgo.com/{say}")
+                    except webbrowser.Error:
                         self.speak("Мне нужен дисплей, и установленные в системе окружение рабочего стола и браузер.")
                     cnt_speak += 1
                     if cnt_speak == 1: break
@@ -647,9 +649,9 @@ class MainVas():
                     for toExclude in excludeList:
                         video_search = video_search.replace(toExclude, '')
                     try:
-                        self.speak(f'Ищу видео {video_search}.')
-                        subprocess.run(["x-www-browser", f"https://www.youtube.com/results?search_query={video_search}"])
-                    except Exception:
+                        self.speak(f'Ищу видео {video_search}...')
+                        webbrowser.open_new_tab(f"https://www.youtube.com/results?search_query={video_search}")
+                    except webbrowser.Error:
                         self.speak("Мне нужен дисплей, и установленные в системе окружение рабочего стола и браузер.")
                     cnt_speak += 1
                     if cnt_speak == 1: break

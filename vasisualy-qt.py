@@ -21,7 +21,7 @@ import subprocess
 import requests
 from bs4 import BeautifulSoup
 import speech_recognition
-import plyer
+import webbrowser
 
 config_dict = get_default_config()
 config_dict['language'] = 'ru'
@@ -495,18 +495,18 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow, QtWidgets.QListWid
                 for net in ("Браузер", "браузер", "Интернет", "интернет", "Сеть", "сеть", "Паутина", "паутина"):
                     if net in say:
                         try:
-                            # Открытие браузера по умолчанию с помощью терминала
-                            tts_d.speak("Я открыл браузер.")
-                            subprocess.run('x-www-browser')
-                        except Exception:
-                            self.speak("Не удалось открыть веб-браузер")
+                            # Открытие браузера по умолчанию
+                            self.speak("Открываю браузер...")
+                            webbrowser.open_new_tab('')
+                        except webbrowser.Error:
+                            self.speak("Не удалось открыть веб-браузер.")
                             
                 for yt in ("Youtube", "youtube", "Ютуб", "ютуб", "Ютьюб", "ютьюб", "Ютюб", "ютюб", "Утуб", "утуб"):
                     if yt in say:
                         try:
-                            tts_d.speak("Открываю YouTube.")
-                            shell(f"x-www-browser 'https://youtube.com/'")
-                        except Exception:
+                            self.speak("Открываю YouTube...")
+                            webbrowser.open_new_tab('https://youtube.com/')
+                        except webbrowser.Error:
                             self.speak("Не удалось открыть YouTube.")
                             
                 for win in ("Окно", "окно", "Окошко", "окошко", "Дверь", "дверь", "Замок", "замок"):
@@ -623,7 +623,8 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow, QtWidgets.QListWid
                     for toExclude in excludeList:
                         say = say.replace(toExclude, '')
                     self.speak("Сейчас найду.")
-                    shell(f"x-www-browser 'https://duckduckgo.com/{say}'") # Поиск данного запроса в интернетах
+                    # Поиск данного запроса в интернетах
+                    webbrowser.open_new_tab(f"https://duckduckgo.com/{say}")
                 cnt_speak += 1
                 if cnt_speak == 1: break
             else:
@@ -662,8 +663,8 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow, QtWidgets.QListWid
                 video_search = say.replace(i, '')
                 for toExclude in excludeList:
                     video_search = video_search.replace(toExclude, '')
-                self.speak(f'Ищу видео {video_search}.')
-                subprocess.run(["x-www-browser", f"https://www.youtube.com/results?search_query={video_search}"])
+                self.speak(f'Ищу видео {video_search}...')
+                webbrowser.open_new_tab(f"https://www.youtube.com/results?search_query={video_search}")
                 cnt_speak += 1
                 if cnt_speak == 1: break
             else:
