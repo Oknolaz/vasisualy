@@ -129,6 +129,6 @@ python vasisualy-win.py
 Поздравляю Вас! :+1:
 
 ## Обратная связь
-Telegram: @oknolaz_dev
+Telegram: [@oknolaz_dev](https://t.me/oknolaz_dev)
 
 Matrix: @oknolaz:matrix.org
