@@ -46,7 +46,7 @@ cd vasisualy
 ```
 After these steps, just run the script in the terminal with this command for Qt GUI version without speech recognition:
 ```
-python3 vasisualy-qt.py
+python3 main.py
 ```
 For CLI version with speech recognition, adapted for single board computers:
 ```
@@ -111,7 +111,7 @@ cd vasisualy
 ```
 После этих действий можно запускать скрипт этой командой для Qt GUI версии без распознавания речи:
 ```
-python3 vasisualy-qt.py
+python3 main.py
 ```
 Для CLI версии с распознаванием речи, адаптированной для одноплатных компьютеров (Raspberry Pi, Orange Pi и др.):
 ```
