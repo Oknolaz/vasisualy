@@ -47,15 +47,19 @@ cd vasisualy
 ```
 python3 main.py
 ```
+### CLI для GNU/Linux
 Для CLI версии с распознаванием речи, адаптированной для одноплатных компьютеров (Raspberry Pi, Orange Pi и др.):
 ```
-python3 vasisualy-pi.py
+git clone https://github.com/Oknolaz/vasisualy-pi
+cd vasisualy-pi
+python3 main.py
 ```
 ### Windows
 Вам нужно установить [интерпретатор python3](https://python.org) и [VLC media player](https://videolan.org/). После установки интерпретатора - установите необходимые модули python с помощью pip:
 ```
 pip install pyowm mss qt-material jinja2 pyttsx3 python-vlc pyqtwebengine wikipedia geocoder beautifulsoup4 lxml SpeechRecognition pyaudio translate
 ```
+Затем скачайте [данный репозиторий](https://github.com/Oknolaz/vasisualy-win/), распакуйте скачанный архив и перейдите в папку с программой.
 Далее просто запустите скрипт командой:
 ```
 python vasisualy-win.py
