@@ -66,7 +66,14 @@ python vasisualy-win.py
 ```
 Поздравляю Вас! :+1:
 
+## Лицензия
+Vasisualy - это свободное программное обеспечение: вы можете использовать и изменять его по условиям лицензии GNU General Public License 3.0.
+
 ## Обратная связь
 Telegram: [@oknolaz_dev](https://t.me/oknolaz_dev)
 
 Matrix: @oknolaz:matrix.org
+
+
+## Пожертвования
+### Bitcoin: bc1qjv3zkfdn62tegn2nc36p722pxnup2fpm8lteq0
