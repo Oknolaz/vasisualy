@@ -13,7 +13,7 @@ def main(say, widget):
             for toExclude in excludeList:
                 question = question.replace(toExclude, '')
             if question == "" or question == " " or question == "  ":
-                toSpeak("Я не могу ответить на отсутствующий вопрос! Задайте вопрос!")
+                toSpeak = "Я не могу ответить на отсутствующий вопрос! Задайте вопрос!"
             else:
                 try:
                     answer = wikipedia.summary(question, sentences=4)

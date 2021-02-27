@@ -10,7 +10,7 @@ from core import speak
 from core import talk
 import random
 import speech_recognition
-import time
+import subprocess
 
 # Skills
 from skills import time_date
@@ -31,9 +31,13 @@ from skills import weather_no_city
 from skills import translate
 from skills import news
 from skills import coin
+from skills import upd_upg
+from skills import shoplist
+from skills import todolist
+from skills import netconnection
 
 
-wrong = ("Простите, я вас не понимаю.", "Мне кажется вы несёте какой-то бред.", "Что?", "Вы, наверное, ошиблись. Я вас не понимаю.", "Извините, я появился совсем недавно, я пока понимаю очень мало слов.", "Чего?", "А? Что? Я Вас не понимаю.", "Пожалуйста, не говорите слов, которых я незнаю.", "Вы пытаетесь оскорбить меня этим?", "Не издевайтесь надо мной, я знаю не так много слов.", "Извините, я не могу Вас понять.", "А?", "Объясните попроще.", "Пожалуйста, прочитайте моё описание. Скорее всего я не умею делать то, что вы меня просите или попробуйте использовать синонимы.", "Вы ошиблись.") # Ответы на неизвестную команду.
+wrong = ("Простите, я вас не понимаю.", "Мне кажется вы несёте какой-то бред.", "Что?", "Вы, наверное, ошиблись. Я вас не понимаю.", "Извините, я появился совсем недавно, я пока понимаю очень мало слов.", "Чего?", "А? Что? Я Вас не понимаю.", "Пожалуйста, не говорите слов, которых я незнаю.", "Вы пытаетесь оскорбить меня этим?", "Не издевайтесь надо мной, я знаю не так много слов.", "Извините, я не могу Вас понять.", "А?", "Объясните попроще.", "Пожалуйста, прочитайте моё описание. Скорее всего я не умею делать то, что вы меня просите или попробуйте использовать синонимы.", "Вы ошиблись.", "Я не понимаю твоего вопроса.", "Мне не понятен твой вопрос.", "Не могу понять о чём ты говоришь.", "Я не понимаю.", "О чём ты?", "Я не могу распознать вопрос.") # Ответы на неизвестную команду.
 guessnum = ("Угадай число", "угадай число", "Поиграем в число", "поиграем в число", "Играть в угадай число", "играть в угадай число", "Играть в число", "играть в число", "Угадать число", "угадать число", "Угадывать число", "угадывать число")
 russian_roulette = ("Русская рулетка", "русская рулетка", "В русскую рулетку", "в русскую рулетку")
 
@@ -88,7 +92,6 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow, QtWidgets.QListWid
         self.program()
 
     def program(self):
-        cnt = 0
         say = self.say
         skillUse = False
         
@@ -184,6 +187,18 @@ class MainWindow(QtWidgets.QMainWindow, design.Ui_MainWindow, QtWidgets.QListWid
             skillUse = True
             
         elif news.main(say, self.listWidget) != "":
+            skillUse = True
+            
+        elif upd_upg.main(say, self.listWidget) != "":
+            skillUse = True
+            
+        elif shoplist.main(say, self.listWidget) != "":
+            skillUse = True
+            
+        elif todolist.main(say, self.listWidget) != "":
+            skillUse = True
+            
+        elif netconnection.main(say, self.listWidget) != "":
             skillUse = True
         
         elif say == 'stop' or say == 'Stop' or say == 'Стоп' or say == 'стоп':
