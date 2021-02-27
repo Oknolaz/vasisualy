@@ -11,7 +11,7 @@ def arch_aur_deps(package):
     os.chdir(f"./{package}")
     subprocess.run(["makepkg", "-sri"])
     os.chdir("..")
-    subprocess.run(["rm", "-rf", package)
+    subprocess.run(["rm", "-rf", package])
 
 
 if choice == "":
