@@ -59,7 +59,7 @@ python3 main.py
 ```
 pip install pyowm mss qt-material jinja2 pyttsx3 python-vlc pyqtwebengine wikipedia geocoder beautifulsoup4 lxml SpeechRecognition pyaudio translate
 ```
-Затем скачайте [данный репозиторий](https://github.com/Oknolaz/vasisualy-win/), распакуйте скачанный архив и перейдите в папку с программой.
+Затем скачайте [данный репозиторий](https://github.com/Oknolaz/vasisualy-windows/), распакуйте скачанный архив и перейдите в папку с программой.
 Далее просто запустите скрипт командой:
 ```
 python vasisualy-win.py
