@@ -38,14 +38,14 @@ elif choice == "1":
     subprocess.run(["sudo", "rm", "vasisualy-pi", "vasisualy"])
     subprocess.run(["sudo", "wget", "https://raw.githubusercontent.com/Oknolaz/vasisualy-additional-files/main/vasisualy"])
     subprocess.run(["sudo", "chmod", "+x", "vasisualy"])
-    os.chdir("~/")
+    os.chdir(os.path.expanduser("~"))
     subprocess.run(["git", "clone", "https://github.com/Oknolaz/vasisualy-pi"])
     subprocess.run(["sudo", "cp", "-r", "vasisualy-pi/", "/usr/share/"])
     subprocess.run(["rm", "-rf", "vasisualy-pi/"])
     os.chdir("/usr/bin/")
     subprocess.run(["sudo", "wget", "https://raw.githubusercontent.com/Oknolaz/vasisualy-additional-files/main/vasisualy-pi"])
     subprocess.run(["sudo", "chmod", "+x", "vasisualy-pi"])
-    os.chdir("~/")
+    os.chdir(os.path.expanduser("~"))
     print(">>>\n>>>\n>>> Установка успешно завершена. Программу можно запустить командой vasisualy или vasisualy-pi для консольной версии.")
 
     
@@ -67,14 +67,14 @@ elif choice == "2":
     subprocess.run(["sudo", "rm", "vasisualy-pi", "vasisualy"])
     subprocess.run(["sudo", "wget", "https://raw.githubusercontent.com/Oknolaz/vasisualy-additional-files/main/vasisualy"])
     subprocess.run(["sudo", "chmod", "+x", "vasisualy"])
-    os.chdir("~/")
+    os.chdir(os.path.expanduser("~"))
     subprocess.run(["git", "clone", "https://github.com/Oknolaz/vasisualy-pi"])
     subprocess.run(["sudo", "cp", "-r", "vasisualy-pi/", "/usr/share/"])
     subprocess.run(["rm", "-rf", "vasisualy-pi/"])
     os.chdir("/usr/bin/")
     subprocess.run(["sudo", "wget", "https://raw.githubusercontent.com/Oknolaz/vasisualy-additional-files/main/vasisualy-pi"])
     subprocess.run(["sudo", "chmod", "+x", "vasisualy-pi"])
-    os.chdir("~/")
+    os.chdir(os.path.expanduser("~"))
     print(">>>\n>>>\n>>> Установка успешно завершена. Программу можно запустить командой vasisualy или vasisualy-pi для консольной версии.")
 
 
