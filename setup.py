@@ -57,7 +57,7 @@ setup(
     install_requires=['pyowm', 'python-vlc', 'pyaudio', 'translate', 'wikipedia', 'mss', 'qt-material', 'geocoder', 'beautifulsoup4', 'lxml', 'speechrecognition', 'pyqt5', 'pyqtwebengine', 'scipy', 'sounddevice'],
 
     project_urls={
-        'Bug Reports': 'https://github.com/pypa/sampleproject/issues',
+        'Bug Reports': 'https://github.com/Oknolaz/vasisualy/issues',
         'Source': 'https://github.com/Oknolaz/vasisualy/',
         },
 )
