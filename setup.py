@@ -1,95 +1,63 @@
-import subprocess
-import os
+from setuptools import setup, find_packages
+import pathlib
 
-print("Голосовой ассистент Васисуалий\n\n")
-print("Доступные для установки дистрибутивы:\n1) Arch Linux     2) Debian/Ubuntu     3) Fedora/RedHat      4) OpenSuse     5) Alpine Linux")
-choice = input("Введите цифру соответствующую вашему дистрибутиву (без скобок и прочих символов): ")
+here = pathlib.Path(__file__).parent.resolve()
 
+long_description = (here / 'README.md').read_text(encoding='utf-8')
 
-def arch_aur_deps(package):
-    subprocess.run(["git", "clone", f"https://aur.archlinux.org/{package}.git"])
-    os.chdir(f"./{package}")
-    subprocess.run(["makepkg", "-sri"])
-    os.chdir("..")
+setup(
+    name='Vasisualy',
 
+    version='0.6.2',
 
-if choice == "":
-    print("Вы не ввели номер дистрибутива!")
-
-
-elif choice == "1":
-    print(">>> Установка необходимых пакетов")
-    subprocess.run(["sudo", "pacman", "-Sy", "--needed", "--noconfirm", "git", "base-devel", "python3", "python-pip", "python-pyqt5", "python-pyqt5-webengine", "pulseaudio", "python-pyaudio", "wget"])
-    print(">>> Установка синтезатора речи RHVoice")
-    arch_aur_deps("rhvoice")
-    print(">>> Установка модуля VLC для Python")
-    arch_aur_deps("python-vlc")
-    print(">>> Установка необходимых модулей с помощью Pip")
-    subprocess.run(["pip3", "install", "translate", "geocoder", "pyowm", "mss", "qt-material", "speechrecognition", "wikipedia", "lxml"])
-    print(">>> Копирование desktop файла в директорию приложений")
-    subprocess.run(["wget", "https://raw.githubusercontent.com/Oknolaz/vasisualy-additional-files/main/vasisualy.desktop"])
-    subprocess.run(["sudo", "cp", "-r", "vasisualy.desktop", "/usr/share/applications/"])
-    os.chdir("..")
-    print(">>> Копирование исходного кода в корневую директорию")
-    subprocess.run(["sudo", "cp", "-r", "vasisualy/", "/usr/share/"])
-    subprocess.run(["rm", "-rf", "vasisualy/"])
-    os.chdir("/usr/bin/")
-    print(">>> Копирование исполняемых файлов")
-    subprocess.run(["sudo", "rm", "vasisualy-pi", "vasisualy"])
-    subprocess.run(["sudo", "wget", "https://raw.githubusercontent.com/Oknolaz/vasisualy-additional-files/main/vasisualy"])
-    subprocess.run(["sudo", "chmod", "+x", "vasisualy"])
-    os.chdir(os.path.expanduser("~"))
-    subprocess.run(["git", "clone", "https://github.com/Oknolaz/vasisualy-pi"])
-    subprocess.run(["sudo", "cp", "-r", "vasisualy-pi/", "/usr/share/"])
-    subprocess.run(["rm", "-rf", "vasisualy-pi/"])
-    os.chdir("/usr/bin/")
-    subprocess.run(["sudo", "wget", "https://raw.githubusercontent.com/Oknolaz/vasisualy-additional-files/main/vasisualy-pi"])
-    subprocess.run(["sudo", "chmod", "+x", "vasisualy-pi"])
-    os.chdir(os.path.expanduser("~"))
-    print(">>>\n>>>\n>>> Установка успешно завершена. Программу можно запустить командой vasisualy или vasisualy-pi для консольной версии.")
-
+    description='Russian voice assistant for GNU/Linux.',
     
+    license='GPLv3',
+
+    long_description=long_description,
+
+    long_description_content_type='text/markdown',
+
+    url='https://github.com/Oknolaz/vasisualy',
+
+    author='Oknolaz',
+
+    author_email='oknolaz.freedom@protonmail.com',
+
+    classifiers=[
+        'Development Status :: 3 - Alpha',
+
+        'Intended Audience :: End Users/Desktop',
+        'Topic :: Communications :: Chat',
+        'Topic :: Games/Entertainment',
+
+        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+        
+        'Natural Language :: Russian',
+        
+        'Operating System :: Android',
+        'Operating System :: POSIX :: Linux',
+        
+        'Environment :: X11 Applications :: Qt',
+        
+        'Programming Language :: Python :: 3',
+    ],
+
+    keywords='voice assistant, voice, assistant, russian language',
+
+    packages=find_packages(),
     
-elif choice == "2":
-    print(">>> Установка зависимостей с помощью APT")
-    subprocess.run(["sudo", "apt", "install", "git", "python3", "python3-pip", "python3-pyqt5", "python3-pyqt5.qtwebengine", "python3-vlc", "python3-pyaudio", "apt-utils", "pulseaudio", "wget", "-y"])
-    print(">>> Установка зависимостей с помощью Pip")
-    subprocess.run(["pip3", "install", "translate", "geocoder", "pyowm", "mss", "qt-material", "speechrecognition", "wikipedia", "lxml"])
-    print(">>> Копирование desktop файла в директорию приложений")
-    subprocess.run(["wget", "https://raw.githubusercontent.com/Oknolaz/vasisualy-additional-files/main/vasisualy.desktop"])
-    subprocess.run(["sudo", "cp", "-r", "vasisualy.desktop", "/usr/share/applications/"])
-    os.chdir("..")
-    print(">>> Копирование исходного кода в корневую директорию")
-    subprocess.run(["sudo", "cp", "-r", "vasisualy/", "/usr/share/"])
-    subprocess.run(["rm", "-rf", "vasisualy/"])
-    os.chdir("/usr/bin/")
-    print(">>> Копирование исполняемых файлов")
-    subprocess.run(["sudo", "rm", "vasisualy-pi", "vasisualy"])
-    subprocess.run(["sudo", "wget", "https://raw.githubusercontent.com/Oknolaz/vasisualy-additional-files/main/vasisualy"])
-    subprocess.run(["sudo", "chmod", "+x", "vasisualy"])
-    os.chdir(os.path.expanduser("~"))
-    subprocess.run(["git", "clone", "https://github.com/Oknolaz/vasisualy-pi"])
-    subprocess.run(["sudo", "cp", "-r", "vasisualy-pi/", "/usr/share/"])
-    subprocess.run(["rm", "-rf", "vasisualy-pi/"])
-    os.chdir("/usr/bin/")
-    subprocess.run(["sudo", "wget", "https://raw.githubusercontent.com/Oknolaz/vasisualy-additional-files/main/vasisualy-pi"])
-    subprocess.run(["sudo", "chmod", "+x", "vasisualy-pi"])
-    os.chdir(os.path.expanduser("~"))
-    print(">>>\n>>>\n>>> Установка успешно завершена. Программу можно запустить командой vasisualy или vasisualy-pi для консольной версии.")
+    package_data={
+        'assets': ['assets/shot.wav', 'assets/misfire.wav'],
+        'icon': ['ui/vas.png']
+    },
 
+    python_requires='>=3.7, <4',
 
-elif choice == "3":
-    print("На данный момент установка программы на Fedora/RedHat недоступна.")
+    install_requires=['pyowm', 'python-vlc', 'pyaudio', 'translate', 'wikipedia', 'mss', 'qt-material', 'geocoder', 'beautifulsoup4', 'lxml', 'speechrecognition', 'pyqt5', 'pyqtwebengine', 'scipy', 'sounddevice'],
 
-
-elif choice == "4":
-    print("На данный момент установка программы на OpenSuse недоступна.")
-
-
-elif choice == "5":
-    print("На данный момент запуск программы на Alpine Linux невозможен.")
-
-
-else:
-    print("Вы ввели неверный номер дистрибутива!")
-
+    project_urls={
+        'Bug Reports': 'https://github.com/pypa/sampleproject/issues',
+        'Source': 'https://github.com/Oknolaz/vasisualy/',
+        },
+)
