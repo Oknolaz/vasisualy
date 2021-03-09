@@ -48,8 +48,8 @@ setup(
     packages=find_packages(),
     
     package_data={
-        'assets': ['assets/shot.wav', 'assets/misfire.wav'],
-        'icon': ['ui/vas.png']
+        'vasisualy': ['assets/shot.wav', 'assets/misfire.wav', 'music/test.wav'],
+        'vasisualy.ui': ['vas.png']
     },
 
     python_requires='>=3.7, <4',
@@ -57,7 +57,7 @@ setup(
     install_requires=['pyowm', 'python-vlc', 'pyaudio', 'translate', 'wikipedia', 'mss', 'qt-material', 'geocoder', 'beautifulsoup4', 'lxml', 'speechrecognition', 'pyqt5', 'pyqtwebengine', 'scipy', 'sounddevice'],
 
     project_urls={
-        'Bug Reports': 'https://github.com/Oknolaz/vasisualy/issues',
+        'Bug Reports': 'https://github.com/Oknolaz/vasisualy/issues/',
         'Source': 'https://github.com/Oknolaz/vasisualy/',
         },
 )
