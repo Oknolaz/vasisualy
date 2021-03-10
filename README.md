@@ -36,23 +36,24 @@ sudo apt-get install python3-speechd python3-pyqt5 vlc python3-pyqt5.qtwebengine
 ```
 Далее необходимо установить другие модули с помощью pip:
 ```
-pip3 install pyowm shell mss qt-material jinja2 wikipedia geocoder beautifulsoup4 lxml SpeechRecognition translate
+pip3 install -r requirements.txt
 ```
 Клонируйте данный репозиторий с помощью Git:
 ```
 git clone https://github.com/Oknolaz/vasisualy
 cd vasisualy
 ```
-После этих действий можно запускать скрипт этой командой для Qt GUI версии без распознавания речи:
+После этих действий можно запускать скрипт этой командой для Qt GUI версии:
 ```
-python3 main.py
+python3 run.py
 ```
+**Также доступен [AUR пакет](https://aur.archlinux.org/packages/vasisualy-git/) для установки в Arch Linux.**
 ### CLI для GNU/Linux
 Для CLI версии с распознаванием речи, адаптированной для одноплатных компьютеров (Raspberry Pi, Orange Pi и др.):
 ```
 git clone https://github.com/Oknolaz/vasisualy-pi
 cd vasisualy-pi
-python3 main.py
+python3 run.py
 ```
 ### Windows
 Вам нужно установить [интерпретатор python3](https://python.org) и [VLC media player](https://videolan.org/). После установки интерпретатора - установите необходимые модули python с помощью pip:
@@ -62,7 +63,7 @@ pip install pyowm mss qt-material jinja2 pyttsx3 python-vlc pyqtwebengine wikipe
 Затем скачайте [данный репозиторий](https://github.com/Oknolaz/vasisualy-windows/), распакуйте скачанный архив и перейдите в папку с программой.
 Далее просто запустите скрипт командой:
 ```
-python vasisualy-win.py
+python main.py
 ```
 Поздравляю Вас! :+1:
 
@@ -72,8 +73,8 @@ Vasisualy - это свободное программное обеспечен�
 ## Обратная связь
 Telegram: [@oknolaz_dev](https://t.me/oknolaz_dev)
 
-Matrix: @oknolaz:matrix.org
+Matrix: [@oknolaz:matrix.org](https://matrix.to/#/@oknolaz:matrix.org)
 
 
 ## Пожертвования
-### Bitcoin: bc1qjv3zkfdn62tegn2nc36p722pxnup2fpm8lteq0
+**Bitcoin**: bc1qjv3zkfdn62tegn2nc36p722pxnup2fpm8lteq0
