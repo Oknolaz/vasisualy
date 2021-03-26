@@ -42,6 +42,7 @@ from .skills import netconnection
 from .skills import record
 from .skills import guess_num
 from .skills import rulette
+from .skills import math
 
 
 wrong = ("Простите, я вас не понимаю.", "Мне кажется вы несёте какой-то бред.", "Что?", "Вы, наверное, ошиблись. Я вас не понимаю.", "Извините, я появился совсем недавно, я пока понимаю очень мало слов.", "Чего?", "А? Что? Я Вас не понимаю.", "Пожалуйста, не говорите слов, которых я незнаю.", "Вы пытаетесь оскорбить меня этим?", "Не издевайтесь надо мной, я знаю не так много слов.", "Извините, я не могу Вас понять.", "А?", "Объясните попроще.", "Пожалуйста, прочитайте моё описание. Скорее всего я не умею делать то, что вы меня просите или попробуйте использовать синонимы.", "Вы ошиблись.", "Я не понимаю твоего вопроса.", "Мне не понятен твой вопрос.", "Не могу понять о чём ты говоришь.", "Я не понимаю.", "О чём ты?", "Я не могу распознать вопрос.") # Ответы на неизвестную команду.
@@ -55,10 +56,6 @@ class Main(QtWidgets.QMainWindow, design.Ui_MainWindow, QtWidgets.QListWidgetIte
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.guessTry = 0
-        self.isGuessNum = False
-        randnum = 0
-        self.isRoulette = False
         self.lineEdit.setFocus()
         speak.speak("Привет, меня зовут Васисуалий. Чем могу быть полезен?", self.listWidget)
         self.lineEdit.editingFinished.connect(self.vasmsg)
@@ -89,77 +86,77 @@ class Main(QtWidgets.QMainWindow, design.Ui_MainWindow, QtWidgets.QListWidgetIte
             item.setTextAlignment(0x0002)
             self.listWidget.addItem(item)
             
-        if time_date.main(say) != "":
+        if time_date.main(say):
             speak.speak(time_date.main(say), self.listWidget)
             skillUse = True
             
-        elif exit.main(say) != "":
+        elif exit.main(say):
             skillUse = True
             
-        elif joke.main(say) != "":
+        elif joke.main(say):
             speak.speak(joke.main(say), self.listWidget)
             skillUse = True
             
-        elif weather.main(say, self.listWidget) != "":
+        elif weather.main(say, self.listWidget):
             skillUse = True
             
-        elif music.main(say, self.listWidget) != "":
+        elif music.main(say, self.listWidget):
             skillUse = True
             
-        elif open.main(say, self.listWidget) != "":
+        elif open.main(say, self.listWidget):
             skillUse = True
             
-        elif screenshot.main(say, self.listWidget) != "":
+        elif screenshot.main(say, self.listWidget):
             skillUse = True
             
-        elif search.main(say, self.listWidget) != "":
+        elif search.main(say, self.listWidget):
             skillUse = True
             
-        elif poweroff.main(say) != "":
+        elif poweroff.main(say):
             skillUse = True
             
-        elif ytvideo.main(say, self.listWidget) != "":
+        elif ytvideo.main(say, self.listWidget):
             skillUse = True
             
-        elif resay.main(say, self.listWidget) != "":
+        elif resay.main(say, self.listWidget):
             skillUse = True
         
-        elif coin.main(say, self.listWidget) != "":
+        elif coin.main(say, self.listWidget):
             skillUse = True
             
-        elif map.main(say, self.listWidget) != "":
+        elif map.main(say, self.listWidget):
             skillUse = True
             self.dialog = map.OpenVasMap()
             self.dialog.show()
             
-        elif wiki.main(say, self.listWidget) != "":
+        elif wiki.main(say, self.listWidget):
             skillUse = True
             
-        elif location.main(say, self.listWidget) != "":
+        elif location.main(say, self.listWidget):
             skillUse = True
         
-        elif weather_no_city.main(say, self.listWidget) != "":
+        elif weather_no_city.main(say, self.listWidget):
             skillUse = True
         
-        elif translate.main(say, self.listWidget) != "":
+        elif translate.main(say, self.listWidget):
             skillUse = True
             
-        elif news.main(say, self.listWidget) != "":
+        elif news.main(say, self.listWidget):
             skillUse = True
             
-        elif upd_upg.main(say, self.listWidget) != "":
+        elif upd_upg.main(say, self.listWidget):
             skillUse = True
             
-        elif shoplist.main(say, self.listWidget) != "":
+        elif shoplist.main(say, self.listWidget):
             skillUse = True
             
-        elif todolist.main(say, self.listWidget) != "":
+        elif todolist.main(say, self.listWidget):
             skillUse = True
             
-        elif netconnection.main(say, self.listWidget) != "":
+        elif netconnection.main(say, self.listWidget):
             skillUse = True
             
-        elif record.main(say, self.listWidget) != "":
+        elif record.main(say, self.listWidget):
             skillUse = True
         
         elif guess_num.isTriggered(say):
@@ -172,6 +169,9 @@ class Main(QtWidgets.QMainWindow, design.Ui_MainWindow, QtWidgets.QListWidgetIte
             skillUse = True
             global isRuLette
             isRuLette = rulette.startGame(self.listWidget)
+            
+        elif math.calculate(say, self.listWidget):
+            skillUse = True
         
         elif say == 'stop' or say == 'Stop' or say == 'Стоп' or say == 'стоп':
             speak.tts_d.stop()

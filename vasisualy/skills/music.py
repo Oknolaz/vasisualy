@@ -55,7 +55,7 @@ def main(say, widget):
                     playFromDir()
                 elif say in stop_music:
                     pass
-            except Exception:
+            except ValueError:
                 if say in stop_music:
                     pass
                 else:
@@ -86,18 +86,13 @@ def main(say, widget):
 
 def playFromDir():
     global musicIsPlayed, usrPlayer
-    os.chdir("./music/")
     isInMusicDir = True
-    playlist = os.listdir()
+    playlist = os.listdir('./music')
     if musicIsPlayed:
         usrPlayer.stop()
-        usrPlayer = vlc.MediaPlayer(random.choice(playlist))
+        usrPlayer = vlc.MediaPlayer(f'music/{random.choice(playlist)}')
         usrPlayer.play()
-        os.chdir(os.path.dirname(os.path.abspath(__file__)))
-        os.chdir("..")
     else:
-        usrPlayer = vlc.MediaPlayer(random.choice(playlist))
+        usrPlayer = vlc.MediaPlayer(f'music/{random.choice(playlist)}')
         usrPlayer.play()
         musicIsPlayed = True
-        os.chdir(os.path.dirname(os.path.abspath(__file__)))
-        os.chdir("..")
