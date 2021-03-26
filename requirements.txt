@@ -13,3 +13,4 @@ pyqt5
 pyqtwebengine
 scipy
 sounddevice
+ru_word2number
