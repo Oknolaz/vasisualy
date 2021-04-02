@@ -1,6 +1,5 @@
 pyowm
 python-vlc
-pyaudio
 translate
 wikipedia
 mss
@@ -13,4 +12,4 @@ pyqt5
 pyqtwebengine
 scipy
 sounddevice
-ru_word2number
+pyalsaaudio

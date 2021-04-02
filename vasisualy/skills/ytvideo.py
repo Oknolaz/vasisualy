@@ -11,7 +11,10 @@ def main(say, widget):
             for toExclude in excludeList:
                 video_search = video_search.replace(toExclude, '')
             toSpeak = f'Ищу видео {video_search}.'
-            webbrowser.open_new_tab(f"https://www.youtube.com/results?search_query={video_search}")
+            try:
+                webbrowser.open_new_tab(f"https://www.youtube.com/results?search_query={video_search}")
+            except Exception:
+                toSpeak = "Не удалось открыть браузер."
             break
         else:
             toSpeak = ""

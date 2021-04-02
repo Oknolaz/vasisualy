@@ -8,7 +8,7 @@ long_description = (here / 'README.md').read_text(encoding='utf-8')
 setup(
     name='Vasisualy',
 
-    version='0.6.2',
+    version='0.6.3',
 
     description='Russian voice assistant for GNU/Linux.',
     
@@ -54,7 +54,7 @@ setup(
 
     python_requires='>=3.7, <4',
 
-    install_requires=['pyowm', 'python-vlc', 'pyaudio', 'translate', 'wikipedia', 'mss', 'qt-material', 'geocoder', 'beautifulsoup4', 'lxml', 'speechrecognition', 'pyqt5', 'pyqtwebengine', 'scipy', 'sounddevice', 'ru_word2number'],
+    install_requires=['pyowm', 'python-vlc', 'pyaudio', 'translate', 'wikipedia', 'mss', 'qt-material', 'geocoder', 'beautifulsoup4', 'lxml', 'speechrecognition', 'pyqt5', 'pyqtwebengine', 'scipy', 'sounddevice', 'ru_word2number', 'pyalsaaudio'],
 
     project_urls={
         'Bug Reports': 'https://github.com/Oknolaz/vasisualy/issues/',
