@@ -13,3 +13,4 @@ pyqtwebengine
 scipy
 sounddevice
 pyalsaaudio
+ru_word2number
