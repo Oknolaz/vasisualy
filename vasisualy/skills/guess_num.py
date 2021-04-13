@@ -14,7 +14,7 @@ def isTriggered(say):
     return triggered
 
 def getRandomNum():
-    randnum = random.randint(0, 100)
+    randnum = random.randint(0, 100)  # Опеределение случайного числа
     return randnum
 
 def startGame(widget):
@@ -27,9 +27,9 @@ def game(say, num, gameState, widget):
     gameState = True
     guessTry = 0
     try:
-        usrnum = int(say)
+        usrnum = int(say)  # Преобразование пользовательского ввода в целое число
     except Exception:
-        pass
+        pass  # Если пользователь не ввёл число - ничего не делать
     if usrnum == -1:
         pass
     elif usrnum < num:
@@ -40,6 +40,6 @@ def game(say, num, gameState, widget):
         guessTry += 1
     elif usrnum == num:
         speak.speak(f"Поздравляю, ты выиграл затратив на это {str(guessTry+1)} попытки.", widget)
-        gameState = False
+        gameState = False  # Конец игры
         guessTry = 0
     return gameState

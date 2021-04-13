@@ -10,6 +10,7 @@ trigger = ("Русская рулетка", "русская рулетка", "В
 def isTriggered(say):
     for i in trigger:
         if i in say:
+            # Если входящее сообщение соответствует триггеру, передаётся истинное значение
             triggered = True
             break
         else:
@@ -18,16 +19,21 @@ def isTriggered(say):
     return triggered
 
 def startGame(widget):
-    bullet = random.choice([0, 0, 0, 0, 0, 1])
+    bullet = random.choice([0, 0, 0, 0, 0, 1])  # Случайное расположение патрона. 0 - пусто, 1 - патрон в стволе.
     isRuLette = True
     speak.speak("Я первый стреляю, если хочешь выстрелить - скажи \"выстрел\".", widget)
     if bullet == 1:
+        '''
+        Если патрон в стволе - воспроизводится звук выстрела,
+        пользователь выигрывает - игра не продолжается.
+        '''
         media = inst.media_new("vasisualy/assets/shot.wav")
         player.set_media(media)
         player.play()
         speak.speak("Ты выиграл.", widget)
         isRuLette = False
     else:
+        # В противном случае воспроизводится звук промаха и игра продолжается
         media = inst.media_new("vasisualy/assets/misfire.wav")
         player.set_media(media)
         player.play()

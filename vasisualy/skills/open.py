@@ -101,10 +101,10 @@ def main(say, widget):
             try:
                 app = say.split()
                 open_index = app.index(i)
-                app = app[open_index+1:]
+                app = app[open_index + 1:]
                 app = str(app)
-                app = app.replace(i, '').replace(' ', '').replace("[", "").replace("]", "").replace('\'', "")
-                subprocess.Popen(app)
+                app = app.replace(i, '').replace(' ', '').replace("[", "").replace("]", "").replace('\'', "").replace(",", " ")
+                subprocess.Popen(app)  # Запуск программы
                 toSpeak = f"Я открыл {app}."
                 break
             except Exception:

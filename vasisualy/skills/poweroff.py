@@ -8,7 +8,7 @@ def main(say):
     for i in poweroff:
         if i in say:
             speak.tts_d.speak("Я выключаю компьтер. До свидания.")
-            subprocess.run("systemctl", "poweroff")
+            subprocess.run("systemctl", "poweroff") # Выключение ПК для systemd
         
     for i in reboot:
         if i in say:

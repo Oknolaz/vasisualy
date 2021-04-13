@@ -43,21 +43,26 @@ from .skills import record
 from .skills import guess_num
 from .skills import rulette
 from .skills import math
+from .skills import audio
+from .skills import crystal_ball
+from .skills import random_num
+from .skills import timer
 
 
-wrong = ("Простите, я вас не понимаю.", "Мне кажется вы несёте какой-то бред.", "Что?", "Вы, наверное, ошиблись. Я вас не понимаю.", "Извините, я появился совсем недавно, я пока понимаю очень мало слов.", "Чего?", "А? Что? Я Вас не понимаю.", "Пожалуйста, не говорите слов, которых я незнаю.", "Вы пытаетесь оскорбить меня этим?", "Не издевайтесь надо мной, я знаю не так много слов.", "Извините, я не могу Вас понять.", "А?", "Объясните попроще.", "Пожалуйста, прочитайте моё описание. Скорее всего я не умею делать то, что вы меня просите или попробуйте использовать синонимы.", "Вы ошиблись.", "Я не понимаю твоего вопроса.", "Мне не понятен твой вопрос.", "Не могу понять о чём ты говоришь.", "Я не понимаю.", "О чём ты?", "Я не могу распознать вопрос.") # Ответы на неизвестную команду.
+wrong = ("Прости, я тебя не понимаю.", "Мне кажется ты несёшь какой-то бред.", "Что?", "Ты, наверное, ошибаешься. Я тебя не понимаю.", "Извини, я появился совсем недавно, я пока понимаю очень мало слов.", "Чего?", "А? Что? Я тебя не понимаю.", "Пожалуйста, не говори слов, которых я незнаю.", "Ты пытаешься оскорбить меня этим?", "Не издевайся надо мной, я знаю не так много слов.", "Извини, я не могу тебя понять.", "А?", "Объясни попроще.", "Пожалуйста, прочитай моё описание. Скорее всего я не умею делать то, что ты меня просишь или попробуй использовать синонимы.", "Ты ошибаешься.", "Я не понимаю твоего вопроса.", "Мне не понятен твой вопрос.", "Не могу понять о чём ты говоришь.", "Я не понимаю.", "О чём ты?", "Я не могу распознать вопрос.") # Ответы на неизвестную команду.
 
 randnum = -1
 isGuessNum = False
 isRuLette = False
 
 
-class Main(QtWidgets.QMainWindow, design.Ui_MainWindow, QtWidgets.QListWidgetItem):
+class Main(QtWidgets.QMainWindow, design.Ui_MainWindow):
     def __init__(self):
+        # Инициализация графического интерфейса
         super().__init__()
         self.setupUi(self)
         self.lineEdit.setFocus()
-        speak.speak("Привет, меня зовут Васисуалий. Чем могу быть полезен?", self.listWidget)
+        speak.speak("Привет, меня зовут Васисуалий. Чем могу быть полезен?", self.listWidget) # Передача информации, которую нужно озвучить и вывести на экран, модулю speak
         self.lineEdit.editingFinished.connect(self.vasmsg)
         self.pushButton.clicked.connect(self.recogniser)
         
@@ -72,7 +77,7 @@ class Main(QtWidgets.QMainWindow, design.Ui_MainWindow, QtWidgets.QListWidgetIte
 
 
     def recogniser(self):
-        self.say = recognise.recognise(self, self.listWidget)
+        self.say = recognise.recognise(self, self.listWidget) # Вызов функции распознавания речи
         self.program()
 
     def program(self):
@@ -82,6 +87,7 @@ class Main(QtWidgets.QMainWindow, design.Ui_MainWindow, QtWidgets.QListWidgetIte
         if say == '' or say == ' ':
             pass
         else:
+            # Вывод сообщения пользователя
             item = QtWidgets.QListWidgetItem(say)
             item.setTextAlignment(0x0002)
             self.listWidget.addItem(item)
@@ -171,6 +177,18 @@ class Main(QtWidgets.QMainWindow, design.Ui_MainWindow, QtWidgets.QListWidgetIte
             isRuLette = rulette.startGame(self.listWidget)
             
         elif math.calculate(say, self.listWidget):
+            skillUse = True
+        
+        elif audio.main(say, self.listWidget):
+            skillUse = True
+            
+        elif crystal_ball.main(say, self.listWidget):
+            skillUse = True
+            
+        elif random_num.main(say, self.listWidget):
+            skillUse = True
+            
+        elif timer.main(say, self.listWidget):
             skillUse = True
         
         elif say == 'stop' or say == 'Stop' or say == 'Стоп' or say == 'стоп':

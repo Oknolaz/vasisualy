@@ -6,7 +6,7 @@ trigger = ("Который час", "который час", "подскажи �
 def main(say):
     for i in trigger:
         if i in say:
-            now = datetime.datetime.now() # Получение текущего времени
+            now = datetime.datetime.now()  # Получение текущего времени
             cur_time = "Текущее время: " + now.strftime("%d-%m-%Y %H:%M")
             break
         else:

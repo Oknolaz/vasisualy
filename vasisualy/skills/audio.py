@@ -7,13 +7,13 @@ off = ("Выключи звук", "выключи звук", "Отключи з�
 on = ("Включи звук", "включи звук", "Включить звук", "включить звук")
 
 def main(say, widget):
-    mixer = alsaaudio.Mixer()
-    volume = int(mixer.getvolume()[0])
+    mixer = alsaaudio.Mixer()  # Инициализация звукового устройства
+    volume = int(mixer.getvolume()[0])  # Получение текущей громкости
     
     for i in increase:
         if i in say:
             if volume <= 95:
-                mixer.setvolume(volume + 5)
+                mixer.setvolume(volume + 5)  # Если текущая громкость меньше 95 - она увеличивается на 5%
                 toSpeak = "Громкость увеличена."
             elif volume > 95 and volume < 100:
                 mixer.setvolume(100)
@@ -27,18 +27,18 @@ def main(say, widget):
     for i in decrease:
         if i in say:
             if volume <= 5 and volume != 0:
-                mixer.setvolume(0)
+                mixer.setvolume(0)  # Выключение звука при уровне громкости ниже 5
                 toSpeak = "Звук выключен."
             elif volume == 0:
                 toSpeak = "Звук уже выключен!"
             else:
-                mixer.setvolume(volume - 5)
+                mixer.setvolume(volume - 5)  # Уменьшение уровня громкости на 5%
                 toSpeak = "Громкость уменьшена."
             break
         
     for i in off:
         if i in say:
-            mixer.setvolume(0)
+            mixer.setvolume(0)  # Выключение звука
             toSpeak = "Звук выключен."
             break
     

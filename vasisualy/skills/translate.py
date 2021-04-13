@@ -14,8 +14,8 @@ def main(say, widget):
             for i in ("на английский", "по-английски", "по английски", "на английском"):
                 if i in trans_text:
                     trans_text = trans_text.replace(i, "", 1)
-                    translator = Translator(to_lang = "en", from_lang = "ru")
-                    toSpeak = translator.translate(trans_text)
+                    translator = Translator(to_lang = "en", from_lang = "ru") # Инициализация исходного языка и переводимого языка
+                    toSpeak = translator.translate(trans_text) # Перевод и запись в переменную для вывода сообщения
                     isTranslated = True
             for i in ("на русский", "на русском", "по-русски", "по русски"):
                 if i in trans_text:
@@ -62,7 +62,7 @@ def main(say, widget):
             if trans_text in ('', ' ', '  ', '   '):
                 toSpeak = "Укажите текст, который нужно перевести."
             elif not isTranslated:
-                translator = Translator(to_lang = "en", from_lang = "ru")
+                translator = Translator(to_lang = "en", from_lang = "ru") # Если во входящем сообщении нет поддерживаемого языка происходит перевод с русского на английский
                 toSpeak = translator.translate(trans_text)
             break
         else:

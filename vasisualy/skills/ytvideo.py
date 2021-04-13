@@ -12,7 +12,7 @@ def main(say, widget):
                 video_search = video_search.replace(toExclude, '')
             toSpeak = f'Ищу видео {video_search}.'
             try:
-                webbrowser.open_new_tab(f"https://www.youtube.com/results?search_query={video_search}")
+                webbrowser.open_new_tab(f"https://www.youtube.com/results?search_query={video_search}") # Открытие страницы поиска с запросом в стандартном браузере
             except Exception:
                 toSpeak = "Не удалось открыть браузер."
             break

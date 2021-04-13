@@ -4,10 +4,9 @@ from pyowm.owm import OWM
 from pyowm.utils.config import get_default_config
 
 config_dict = get_default_config()
-config_dict['language'] = 'ru'
+config_dict['language'] = 'ru' # Установка русского языка для OpenWeatherMap
 
 trigger = ("Какая погода во", "какая погода во", "Какая погода в", "какая погода в", "Погода во", "погода во", "Погода в", "погода в", "За окном в", "за окном в", "На улице в", "на улице в", "Погода на сегодня в", "погода на сегодня в", "Расскажи о погоде в", "расскажи о погоде в", "Расскажи про погоду в", "расскажи про погоду в", "Вэзэр в", "вэзэр в", "Везер в", "везер в", "Веазер в", "веазер в")
-
 excludeList = ("Васисуалий", "Васисуали", "васисуалий", "васисуали", "Васян", "васян", "Васёк", "васёк", "Васися", "васися", "Васисяндра", "васисяндра", "Васька", "васька", "Вася", "вася", "Василий", "василий", "Пожалуйста", "пожалуйста")
 
 def main(say, widget):
@@ -18,9 +17,12 @@ def main(say, widget):
             for toExclude in excludeList:
                 weather_city = weather_city.replace(toExclude, '')
             try:
-                id = OWM('e45bc007f87a48d597d60091779f2d88', config_dict)  # API ключ Open weather map
+                id = OWM('e45bc007f87a48d597d60091779f2d88', config_dict)
                 mgr = id.weather_manager()
                 last = weather_city[-1]
+                '''
+                Склонение введённого пользователем города.
+                '''
                 if last == 'е':
                     try:
                         city = weather_city.replace(weather_city[-1], "а")

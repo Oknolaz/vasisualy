@@ -13,8 +13,8 @@ def main(say, widget):
                 todo = say.replace(i, "")
                 for toExclude in excludeList:
                     todo = todo.replace(toExclude, "")
-                todolist = open("todolist.txt", "a")
-                todolist.write(todo)
+                todolist = open("todolist.txt", "a") # Открытие файла со списком дел
+                todolist.write(todo) # Запись дел в файл
                 todolist.close()
                 toSpeak = "Данные успешно добавлены в список дел."
             except Exception:
@@ -33,6 +33,7 @@ def main(say, widget):
                 todolist = open("todolist.txt", "r")
                 toSpeak = "Вам нужно сделать следующее:\n"
                 for item in todolist:
+                    # Вывод дел
                     item = item.replace(" и ", "\n").replace(",", "\n")
                     toSpeak += item
                 todolist.close()
@@ -42,6 +43,7 @@ def main(say, widget):
         
     for i in delete:
         if i in say:
+            # Очистка файла
             todolist = open("todolist.txt", "w")
             todolist.write("")
             todolist.close()

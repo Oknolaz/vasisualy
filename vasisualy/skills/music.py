@@ -3,6 +3,7 @@ import vlc
 import os
 from ..core import speak
 
+# Инициализация VLC плеера
 inst = vlc.Instance()
 player=inst.media_player_new()
 is_paused = False
@@ -22,9 +23,9 @@ def main(say, widget):
             try:
                 if "рок" in radiostation:
                     radiostation = "http://pub0302.101.ru:8000/stream/trust/mp3/128/69?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpcCI6IjUxLjE1OC4xNDQuMzIiLCJ1c2VyYWdlbnQiOiJNb3ppbGxhXC81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NDsgcnY6NjguMCkgR2Vja29cLzIwMTAwMTAxIEZpcmVmb3hcLzY4LjAiLCJ1aWRfY2hhbm5lbCI6IjY5IiwidHlwZV9jaGFubmVsIjoiY2hhbm5lbCIsImV4cCI6MTU5NjI3MzUzMn0.04mOBSZ4tirBXTQdbWYpGs8YuJE6Dw7fM7a-zbP-PTs"
-                    media=inst.media_new(radiostation)
+                    media=inst.media_new(radiostation) # Передача интернет-потока радио в качестве источника VLC
                     player.set_media(media)
-                    player.play()
+                    player.play() # Воспроизведение потока
                 elif "поп" in radiostation:
                     radiostation = "http://pub0302.101.ru:8000/stream/pro/aac/64/155?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpcCI6IjUxLjE1OC4xNDQuMzIiLCJ1c2VyYWdlbnQiOiJNb3ppbGxhXC81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NDsgcnY6NjguMCkgR2Vja29cLzIwMTAwMTAxIEZpcmVmb3hcLzY4LjAiLCJ1aWRfY2hhbm5lbCI6IjE1NSIsInR5cGVfY2hhbm5lbCI6ImNoYW5uZWwiLCJleHAiOjE1OTYyNzM2NDh9.9nrmdE85O78l_SWG8ZIbcBb81rlMfjWEFZtyU54v240"
                     media=inst.media_new(radiostation)
@@ -55,7 +56,7 @@ def main(say, widget):
                     playFromDir()
                 elif say in stop_music:
                     pass
-            except ValueError:
+            except Exception:
                 if say in stop_music:
                     pass
                 else:
@@ -69,7 +70,7 @@ def main(say, widget):
         if i == say:
             global usrPlayer
             toSpeak = "Проигрыватель остановлен."
-            player.pause()
+            player.pause() # Остановка проигрывателя
             usrPlayer.stop()
             
     for i in nextSong:
@@ -87,12 +88,13 @@ def main(say, widget):
 def playFromDir():
     global musicIsPlayed, usrPlayer
     isInMusicDir = True
-    playlist = os.listdir('./music')
+    playlist = os.listdir('./music') # Получение списка файлов из директории music в корне проекта
     if musicIsPlayed:
         usrPlayer.stop()
         usrPlayer = vlc.MediaPlayer(f'music/{random.choice(playlist)}')
         usrPlayer.play()
     else:
+        # Воспроизведение музыки из папки music
         usrPlayer = vlc.MediaPlayer(f'music/{random.choice(playlist)}')
         usrPlayer.play()
         musicIsPlayed = True
