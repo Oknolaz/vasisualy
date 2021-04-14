@@ -55,7 +55,7 @@ python3 run.py
 ```
 yay -Sy rhvoice python-vlc
 ```
-Установите необходимые пакеты с помощью [Pacman](https://wiki.archlinux.org/index.php/Pacman_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9):
+Установите необходимые пакеты с помощью [Pacman](https://wiki.archlinux.org/index.php/Pacman_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9)):
 ```
 pacman -Sy python-pyaudio python-pyqt5 python-alsa speech-dispatcher qt5-webengine vlc python-pyqt5-webengine
 ```
