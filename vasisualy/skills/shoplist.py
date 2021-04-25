@@ -1,4 +1,5 @@
 from ..core import speak
+import os
 
 add = ("Добавь в список покупок следующее", "добавь в список покупок следующее", "Добавь в список покупок", "добавь в список покупок", "Добавь в мой список покупок следующее", "добавь в мой список покупок следующее", "Добавь в мой список покупок", "добавь в мой список покупок", "Добавить в список покупок следующее", "добавить в список покупок следующее", "Добавить в список покупок", "добавить в список покупок", "Добавить в мой список покупок", "добавить в мой список покупок")
 show = ("Покажи список покупок", "покажи список покупок", "Покажи мой список покупок", "покажи мой список покупок", "Показать список покупок", "показать список покупок")
@@ -9,6 +10,8 @@ excludeList = ("Васисуалий", "Васисуали", "васисуали
 def main(say, widget):
     for i in add:
         if i in say:
+            appDir = os.path.dirname(os.path.realpath(__file__))
+            os.chdir(f"{appDir}/../..")
             try:
                 toBuy = say.replace(i, "")
                 for toExclude in excludeList:
@@ -29,6 +32,8 @@ def main(say, widget):
             
     for i in show:
         if i in say:
+            appDir = os.path.dirname(os.path.realpath(__file__))
+            os.chdir(f"{appDir}/../..")
             try:
                 shoplist = open("shoplist.txt", "r")
                 toSpeak = "Вам нужно купить следующее:\n"
@@ -42,6 +47,8 @@ def main(say, widget):
         
     for i in delete:
         if i in say:
+            appDir = os.path.dirname(os.path.realpath(__file__))
+            os.chdir(f"{appDir}/../..")
             shoplist = open("shoplist.txt", "w")
             shoplist.write("")
             shoplist.close()

@@ -2,9 +2,8 @@
 # -*- coding: utf-8 -*-
 
 # GUI
-from PyQt5 import QtWidgets
 from .ui import design
-from PyQt5 import QtWidgets, QtGui
+from PyQt5 import QtWidgets
 import sys
 from qt_material import apply_stylesheet
 
@@ -13,8 +12,6 @@ from .core import speak
 from .core import talk
 from .core import recognise
 import random
-import speech_recognition
-import subprocess
 
 # Skills
 from .skills import time_date
@@ -47,6 +44,8 @@ from .skills import audio
 from .skills import crystal_ball
 from .skills import random_num
 from .skills import timer
+from .skills import show_about
+from .skills import show_settings
 
 
 wrong = ("Прости, я тебя не понимаю.", "Мне кажется ты несёшь какой-то бред.", "Что?", "Ты, наверное, ошибаешься. Я тебя не понимаю.", "Извини, я появился совсем недавно, я пока понимаю очень мало слов.", "Чего?", "А? Что? Я тебя не понимаю.", "Пожалуйста, не говори слов, которых я незнаю.", "Ты пытаешься оскорбить меня этим?", "Не издевайся надо мной, я знаю не так много слов.", "Извини, я не могу тебя понять.", "А?", "Объясни попроще.", "Пожалуйста, прочитай моё описание. Скорее всего я не умею делать то, что ты меня просишь или попробуй использовать синонимы.", "Ты ошибаешься.", "Я не понимаю твоего вопроса.", "Мне не понятен твой вопрос.", "Не могу понять о чём ты говоришь.", "Я не понимаю.", "О чём ты?", "Я не могу распознать вопрос.") # Ответы на неизвестную команду.
@@ -65,8 +64,17 @@ class Main(QtWidgets.QMainWindow, design.Ui_MainWindow):
         speak.speak("Привет, меня зовут Васисуалий. Чем могу быть полезен?", self.listWidget) # Передача информации, которую нужно озвучить и вывести на экран, модулю speak
         self.lineEdit.editingFinished.connect(self.vasmsg)
         self.pushButton.clicked.connect(self.recogniser)
-        
-        
+        self.aboutMenu.triggered.connect(self.showAboutDialog)
+        self.settingsMenu.triggered.connect(self.showSettingsDialog)
+
+    def showAboutDialog(self):
+        self.dialog = show_about.ShowAboutWindow()
+        self.dialog.show()
+
+    def showSettingsDialog(self):
+        self.dialog = show_settings.ShowSettingsWindow()
+        self.dialog.show()
+
     def vasmsg(self):
         # Функция берёт переданный в виджет lineEdit текст, очищает виджет и запускает программу
         self.say = self.lineEdit.text()
@@ -74,7 +82,6 @@ class Main(QtWidgets.QMainWindow, design.Ui_MainWindow):
         self.listWidget.scrollToBottom()
         self.say = self.say.capitalize()
         self.program()
-
 
     def recogniser(self):
         self.say = recognise.recognise(self, self.listWidget) # Вызов функции распознавания речи
@@ -118,7 +125,7 @@ class Main(QtWidgets.QMainWindow, design.Ui_MainWindow):
         elif search.main(say, self.listWidget):
             skillUse = True
             
-        elif poweroff.main(say):
+        elif poweroff.main(say, self.listWidget):
             skillUse = True
             
         elif ytvideo.main(say, self.listWidget):

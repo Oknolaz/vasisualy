@@ -1,4 +1,5 @@
 from ..core import speak
+import os
 
 add = ("Добавь в список дел следующее", "добавь в список дел следующее", "Добавь в список дел", "добавь в список дел", "Добавь в мой список дел следующее", "добавь в мой список дел следующее", "Добавь в мой список дел", "добавь в мой список дел", "Добавить в список дел следующее", "добавить в список дел следующее", "Добавить в список дел", "добавить в список дел", "Добавить в мой список дел", "добавить в мой список дел")
 show = ("Покажи список дел", "покажи список дел", "Покажи мой список дел", "покажи мой список дел")
@@ -9,6 +10,8 @@ excludeList = ("Васисуалий", "Васисуали", "васисуали
 def main(say, widget):
     for i in add:
         if i in say:
+            appDir = os.path.dirname(os.path.realpath(__file__))
+            os.chdir(f"{appDir}/../..")
             try:
                 todo = say.replace(i, "")
                 for toExclude in excludeList:
@@ -30,6 +33,8 @@ def main(say, widget):
     for i in show:
         if i in say:
             try:
+                appDir = os.path.dirname(os.path.realpath(__file__))
+                os.chdir(f"{appDir}/../..")
                 todolist = open("todolist.txt", "r")
                 toSpeak = "Вам нужно сделать следующее:\n"
                 for item in todolist:
@@ -44,6 +49,8 @@ def main(say, widget):
     for i in delete:
         if i in say:
             # Очистка файла
+            appDir = os.path.dirname(os.path.realpath(__file__))
+            os.chdir(f"{appDir}/../..")
             todolist = open("todolist.txt", "w")
             todolist.write("")
             todolist.close()
@@ -53,4 +60,3 @@ def main(say, widget):
     if toSpeak != "":
         speak.speak(toSpeak, widget)
     return toSpeak
-            

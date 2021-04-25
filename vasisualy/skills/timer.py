@@ -4,9 +4,11 @@ import datetime
 from ru_word2number import w2n
 from time import sleep
 import vlc
+from plyer import notification
+import os
 
 inst = vlc.Instance()
-player=inst.media_player_new()
+player = inst.media_player_new()
 time = 0
 listWidget = None
 
@@ -14,7 +16,12 @@ trigger = ("Поставь таймер на ", "поставь таймер н�
 
 def timerProcess():
     sleep(time)
-    media = inst.media_new("vasisualy/assets/beep.wav")
+    try:
+        notification.notify(title="Время вышло!", message="Таймер сработал.", timeout=20)
+    except Exception:
+        pass
+    appDir = os.path.dirname(os.path.realpath(__file__))
+    media = inst.media_new(f"{appDir}/../assets/beep.wav")
     player.set_media(media)
     player.play()
     speak.speak("Таймер сработал.", listWidget)
@@ -50,11 +57,11 @@ def main(say, widget):
                     workTime = int(time[0]) * 60
             
             if workTime >= 60:
-                toSpeak = "Таймер запущен на " + str(workTime) / 60 + " минут."
+                toSpeak = "Таймер запущен на " + str(workTime / 60) + " минут."
             elif workTime >= 3600:
-                toSpeak = "Таймер запущен на " + str(workTime) / 3600 + " часов."
+                toSpeak = "Таймер запущен на " + str(workTime / 3600) + " часов."
             elif workTime >= 86400:
-                toSpeak = "Таймер запущен на " + str(workTime) / 86400 + " дней."
+                toSpeak = "Таймер запущен на " + str(workTime / 86400) + " дней."
             else:
                 toSpeak = "Таймер запущен на " + str(workTime) + " секунд."
             time = workTime
