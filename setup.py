@@ -54,7 +54,7 @@ setup(
 
     python_requires='>=3.7, <4',
 
-    install_requires=['pyowm', 'python-vlc', 'pyaudio', 'translate', 'wikipedia', 'mss', 'qt-material', 'geocoder', 'beautifulsoup4', 'lxml', 'speechrecognition', 'pyqt5', 'pyqtwebengine', 'scipy', 'sounddevice', 'ru_word2number', 'pyalsaaudio', 'plyer],
+    install_requires=['pyowm', 'python-vlc', 'pyaudio', 'translate', 'wikipedia', 'mss', 'qt-material', 'geocoder', 'beautifulsoup4', 'lxml', 'speechrecognition', 'pyqt5', 'pyqtwebengine', 'scipy', 'sounddevice', 'ru_word2number', 'pyalsaaudio', 'plyer'],
 
     project_urls={
         'Bug Reports': 'https://github.com/Oknolaz/vasisualy/issues/',
