@@ -3,7 +3,7 @@ import random
 import vlc
 
 inst = vlc.Instance()
-player=inst.media_player_new()
+player = inst.media_player_new()
 
 trigger = ("Русская рулетка", "русская рулетка", "В русскую рулетку", "в русскую рулетку")
 
@@ -17,6 +17,7 @@ def isTriggered(say):
             triggered = False
     
     return triggered
+
 
 def startGame(widget):
     bullet = random.choice([0, 0, 0, 0, 0, 1])  # Случайное расположение патрона. 0 - пусто, 1 - патрон в стволе.
@@ -39,7 +40,8 @@ def startGame(widget):
         player.play()
         speak.speak("Выстрела нет. Твоя очередь.", widget)
     return isRuLette
-    
+
+
 def game(say, widget):
     gameState = True
     if say == "Выстрел" or say == "выстрел":

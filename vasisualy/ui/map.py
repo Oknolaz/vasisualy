@@ -17,7 +17,7 @@ class Ui_Form(object):
         self.horizontalLayout = QtWidgets.QHBoxLayout(Form)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.webEngineView = QtWebEngineWidgets.QWebEngineView(Form)
-        self.webEngineView.setUrl(QtCore.QUrl("https://www.openstreetmap.org/#map=5/46.449/2.210"))
+        self.webEngineView.setUrl(QtCore.QUrl("https://www.openstreetmap.org/"))
         self.webEngineView.setObjectName("webEngineView")
         self.horizontalLayout.addWidget(self.webEngineView)
 

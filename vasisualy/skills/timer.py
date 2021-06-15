@@ -12,7 +12,9 @@ player = inst.media_player_new()
 time = 0
 listWidget = None
 
-trigger = ("Поставь таймер на ", "поставь таймер на ", "Включи таймер на ", "включи таймер на ", "Поставь таймер", "поставь таймер", "Включи таймер", "включи таймер")
+trigger = ("Поставь таймер на ", "поставь таймер на ", "Включи таймер на ", "включи таймер на ", "Поставь таймер",
+           "поставь таймер", "Включи таймер", "включи таймер")
+
 
 def timerProcess():
     sleep(time)
@@ -25,6 +27,7 @@ def timerProcess():
     player.set_media(media)
     player.play()
     speak.speak("Таймер сработал.", listWidget)
+
 
 def main(say, widget):
     for i in trigger:

@@ -2,7 +2,7 @@ from ..core import speak
 from ..ui import map
 from PyQt5 import QtWidgets
 
-trigger = ("Карта", "карта", "Карты", "карты", "Навигатор", "навигатор") # Команды вызова окна OpenStreetMap
+trigger = ("Карта", "карта", "Карты", "карты", "Навигатор", "навигатор")  # Команды вызова окна OpenStreetMap
 
 
 # Окно для показа OpenStreetMap            

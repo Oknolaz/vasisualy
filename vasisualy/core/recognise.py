@@ -2,10 +2,16 @@ from . import speak
 import speech_recognition
 from PyQt5 import QtGui
 
-def recognise(cls, widget):
-    mic_on = QtGui.QIcon.fromTheme("mic-on") # Иконка для состояния распознавания речи
-    mic_off = QtGui.QIcon.fromTheme("mic-off") # Иконка для состояния покоя
-    cls.pushButton.setIcon(mic_on) # Установка иконки во время распознавания речи
+
+def recognise(_cls, widget):
+    '''Распознаёт речь пользователя.
+    :param _cls: класс UI
+    :param widget: виджет, в который выводятся сообщения об ошибках
+    :return: возвращает распознанный текст
+    '''
+    mic_on = QtGui.QIcon.fromTheme("mic-on")  # Иконка для состояния распознавания речи
+    mic_off = QtGui.QIcon.fromTheme("mic-off")  # Иконка для состояния покоя
+    _cls.pushButton.setIcon(mic_on)  # Установка иконки во время распознавания речи
     
     # Настройки распознавания речи
     recognizer = speech_recognition.Recognizer()
@@ -15,7 +21,7 @@ def recognise(cls, widget):
     print("[sys] Говорите...")
         
     with mph as source:
-        say = recognizer.listen(source) # Прослушка микрофона
+        say = recognizer.listen(source)  # Прослушка микрофона
         
     print("[sys] Речь распознаётся...")
         
@@ -28,5 +34,5 @@ def recognise(cls, widget):
         say = ''
         print("[sys] Не удалось распознать речь. Нет подключения к интернету или не подключен микрофон.")
         speak.speak("Речь не распознана.", widget)
-    cls.pushButton.setIcon(mic_off) # Установка иконки спокойствия
+    _cls.pushButton.setIcon(mic_off)  # Установка иконки спокойствия
     return say

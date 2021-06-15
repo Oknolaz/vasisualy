@@ -10,9 +10,16 @@ player = inst.media_player_new()
 is_paused = False
 musicIsPlayed = False
 
-trigger = ("Музыка", "музыка", "Включи музыку", "включи музыку", "Танцы", "танцы", "Танец", "танец", "Потанцуй", "потанцуй", "Хочу танцевать", "хочу танцевать", "Хочу плясать", "хочу плясать", "Музыку", "музыку", "Песня", "песня", "Включи песню", "включи песню", "Музычка", "музычка", "Музончик", "музончик", "Танцульки", "танцульки", "Радио", "радио", "Станция", "станция", "Рэдио", "рэдио", "Музыку", "музыку", "Музычку", "музычку", "Мьюзик", "мьюзик", "Танцуй", "танцуй", "Песню", "песню", "Зажги", "зажги", "Зажигай", "зажигай", "Зажгём", "зажгём", "Отжиг", "отжиг", "Музон", "музон", "Музло", "музло")
+trigger = ("Музыка", "музыка", "Включи музыку", "включи музыку", "Танцы", "танцы", "Танец", "танец", "Потанцуй",
+           "потанцуй", "Хочу танцевать", "хочу танцевать", "Хочу плясать", "хочу плясать", "Музыку", "музыку", "Песня",
+           "песня", "Включи песню", "включи песню", "Музычка", "музычка", "Музончик", "музончик", "Танцульки",
+           "танцульки", "Радио", "радио", "Станция", "станция", "Рэдио", "рэдио", "Музыку", "музыку", "Музычку",
+           "музычку", "Мьюзик", "мьюзик", "Танцуй", "танцуй", "Песню", "песню", "Зажги", "зажги", "Зажигай", "зажигай",
+           "Зажгём", "зажгём", "Отжиг", "отжиг", "Музон", "музон", "Музло", "музло")
 
-stop_music = ("Стоп музыка", "стоп музыка", "Стоп воспроизведение", "стоп воспроизведение", "Останови музыку", "останови музыку", "Выключи музыку", "выключи музыку", "Останови воспроизведение", "останови воспроизведение", "Остановка музыки", "остановка музыки", "Выключи радио", "выключи радио")
+stop_music = ("Стоп музыка", "стоп музыка", "Стоп воспроизведение", "стоп воспроизведение", "Останови музыку",
+              "останови музыку", "Выключи музыку", "выключи музыку", "Останови воспроизведение",
+              "останови воспроизведение", "Остановка музыки", "остановка музыки", "Выключи радио", "выключи радио")
 
 nextSong = ("Следующий трек", "Следующая песня", "Следующая музыка", "Следующее воспроизведение", "Следующий")
 
@@ -24,9 +31,9 @@ def main(say, widget):
             try:
                 if "рок" in radiostation:
                     radiostation = "http://pub0302.101.ru:8000/stream/trust/mp3/128/69?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpcCI6IjUxLjE1OC4xNDQuMzIiLCJ1c2VyYWdlbnQiOiJNb3ppbGxhXC81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NDsgcnY6NjguMCkgR2Vja29cLzIwMTAwMTAxIEZpcmVmb3hcLzY4LjAiLCJ1aWRfY2hhbm5lbCI6IjY5IiwidHlwZV9jaGFubmVsIjoiY2hhbm5lbCIsImV4cCI6MTU5NjI3MzUzMn0.04mOBSZ4tirBXTQdbWYpGs8YuJE6Dw7fM7a-zbP-PTs"
-                    media=inst.media_new(radiostation) # Передача интернет-потока радио в качестве источника VLC
+                    media=inst.media_new(radiostation)  # Передача интернет-потока радио в качестве источника VLC
                     player.set_media(media)
-                    player.play() # Воспроизведение потока
+                    player.play()  # Воспроизведение потока
                 elif "поп" in radiostation:
                     radiostation = "http://pub0302.101.ru:8000/stream/pro/aac/64/155?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpcCI6IjUxLjE1OC4xNDQuMzIiLCJ1c2VyYWdlbnQiOiJNb3ppbGxhXC81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NDsgcnY6NjguMCkgR2Vja29cLzIwMTAwMTAxIEZpcmVmb3hcLzY4LjAiLCJ1aWRfY2hhbm5lbCI6IjE1NSIsInR5cGVfY2hhbm5lbCI6ImNoYW5uZWwiLCJleHAiOjE1OTYyNzM2NDh9.9nrmdE85O78l_SWG8ZIbcBb81rlMfjWEFZtyU54v240"
                     media=inst.media_new(radiostation)
@@ -52,11 +59,11 @@ def main(say, widget):
                     media=inst.media_new(radiostation)
                     player.set_media(media)
                     player.play()
-                elif radiostation == '':
-                    toSpeak = "Включаю музыку из твоей папки. Если хочешь слушать радио - то скажи \"включи (жанр) музыку\"."
-                    playFromDir()
                 elif say in stop_music:
                     pass
+                else:
+                    toSpeak = "Включаю музыку из твоей папки. Если хочешь слушать радио - то скажи \"включи (жанр) музыку\"."
+                    playFromDir()
             except Exception:
                 if say in stop_music:
                     pass
@@ -71,7 +78,7 @@ def main(say, widget):
         if i == say:
             global usrPlayer
             toSpeak = "Проигрыватель остановлен."
-            player.pause() # Остановка проигрывателя
+            player.pause()  # Остановка проигрывателя
             usrPlayer.stop()
             
     for i in nextSong:
@@ -97,7 +104,7 @@ def playFromDir():
                 musicDir = line.replace("music:", "")
     except Exception:
         musicDir = defaults.defaults["music"]
-    playlist = os.listdir(musicDir) # Получение списка файлов из директории music в корне проекта
+    playlist = os.listdir(musicDir)  # Получение списка файлов из директории music в корне проекта
     if musicIsPlayed:
         usrPlayer.stop()
         usrPlayer = vlc.MediaPlayer(f'{musicDir}/{random.choice(playlist)}')

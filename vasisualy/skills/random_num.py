@@ -5,6 +5,7 @@ import random
 trigger = ("Число от ", "число от ")
 answer = ("Это ", "Ответ ", "Это число ")
 
+
 def main(say, widget):
     for i in trigger:
         if i in say:

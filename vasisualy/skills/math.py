@@ -13,6 +13,7 @@ mathWords = {
     "разделить": "/"
 }
 
+
 def getNums(mathExpression):
     expressionWithNums = ""
     for word in mathExpression.split():
@@ -24,6 +25,7 @@ def getNums(mathExpression):
             expressionWithNums += f" {word}"
     return expressionWithNums
 
+
 def clear(mathExpression):
     cleanedExpression = ""
     for word in mathExpression.split():
@@ -33,6 +35,7 @@ def clear(mathExpression):
             word = mathWords.get(word) # Получение математического знака по слову
             cleanedExpression += word
     return cleanedExpression
+
 
 def calculate(say, widget):
     for i in trigger:
