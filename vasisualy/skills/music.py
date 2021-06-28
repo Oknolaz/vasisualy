@@ -96,13 +96,8 @@ def main(say, widget):
 def playFromDir():
     global musicIsPlayed, usrPlayer
     try:
-        appDir = os.path.dirname(os.path.realpath(__file__))
-        os.chdir(f"{appDir}/../..")
-        config = open("vasisualy.conf", "r")
-        for line in config:
-            if "music:" in line:
-                musicDir = line.replace("music:", "")
-    except Exception:
+        musicDir = defaults.get_value("music")
+    except FileNotFoundError:
         musicDir = defaults.defaults["music"]
     playlist = os.listdir(musicDir)  # Получение списка файлов из директории music в корне проекта
     if musicIsPlayed:

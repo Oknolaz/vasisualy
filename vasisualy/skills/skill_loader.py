@@ -52,12 +52,12 @@ def load():
 
 def run_skills(user_message, widget):
     # Активирует навыки
+    result = ''
     for skill in _relation():
         result = sys.modules[skill].main(user_message)
 
-        if result == '':
-            return None
-        else:
+        if result:
             speak.speak(result, widget)
-            return result
             break
+
+    return result

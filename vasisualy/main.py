@@ -8,11 +8,11 @@ import sys
 from qt_material import apply_stylesheet
 
 # Core
-from .core import (speak, talk, recognise)
+from .core import (speak, talk, recognise, defaults)
 import random
 
 # Skills
-from .skills import (skill_loader, time_date, exit, joke, weather, music, open, screenshot, search, poweroff, ytvideo,
+from .skills import (skill_loader, time_date, exit, weather, music, open, screenshot, search, poweroff, ytvideo,
                      resay, map, wiki, location, weather_no_city, translate, news, coin, upd_upg, shoplist, todolist,
                      netconnection, record, guess_num, rulette, math, audio, crystal_ball, random_num, timer,
                      show_about, show_settings, old_skills)
@@ -28,6 +28,27 @@ wrong = ("Прости, я тебя не понимаю.", "Мне кажетс�
          "Пожалуйста, прочитай моё описание. Скорее всего я не умею делать то, что ты меня просишь или попробуй использовать синонимы.",
          "Ты ошибаешься.", "Я не понимаю твоего вопроса.", "Мне не понятен твой вопрос.",
          "Не могу понять о чём ты говоришь.", "Я не понимаю.", "О чём ты?", "Я не могу распознать вопрос.")
+
+styles = {
+    "Dark Amber": "dark_amber.xml",
+    "Dark Blue": "dark_blue.xml",
+    "Dark Cyan": "dark_cyan.xml",
+    "Dark Lightgreen": "dark_lightgreen.xml",
+    "Dark Pink": "dark_pink.xml",
+    "Dark Purple": "dark_purple.xml",
+    "Dark Red": "dark_red.xml",
+    "Dark Teal": "dark_teal.xml",
+    "Dark Yellow": "dark_yellow.xml",
+    "Light Amber": "light_amber.xml",
+    "Light Blue": "light_blue.xml",
+    "Light Cyan": "light_cyan.xml",
+    "Light Lightgreen": "light_lightgreen.xml",
+    "Light Pink": "light_pink.xml",
+    "Light Purple": "light_purple.xml",
+    "Light Red": "light_red.xml",
+    "Light Teal": "light_teal.xml",
+    "Light Yellow": "light_yellow.xml",
+}
 
 randnum = -1
 isGuessNum = False
@@ -122,7 +143,14 @@ class Main(QtWidgets.QMainWindow, design.Ui_MainWindow):
 def main():
     app = QtWidgets.QApplication(sys.argv)
     window = Main()
-    apply_stylesheet(app, theme='dark_red.xml')
+
+    try:
+        theme = defaults.get_value("theme")
+    except FileNotFoundError:
+        theme = defaults.defaults["theme"]
+
+    if theme != "System":
+        apply_stylesheet(app, theme=styles[theme])
     window.show()
     app.exec_()
     speak.tts_d.close()

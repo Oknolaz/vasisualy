@@ -1,4 +1,4 @@
-from ..core import speak
+from ..core import (speak, defaults)
 from pyowm.owm import OWM
 from pyowm.utils.config import get_default_config
 
@@ -22,7 +22,15 @@ def main(say, widget):
             for toExclude in excludeList:
                 weather_city = weather_city.replace(toExclude, '')
             try:
-                id = OWM('e45bc007f87a48d597d60091779f2d88', config_dict)
+                try:
+                    api = defaults.get_value("weather_api")
+                except FileNotFoundError:
+                    api = defaults.defaults["weather_api"]
+
+                if api:
+                    id = OWM(api, config_dict)
+                else:
+                    id = OWM('e45bc007f87a48d597d60091779f2d88', config_dict)
                 mgr = id.weather_manager()
                 last = weather_city[-1]
 

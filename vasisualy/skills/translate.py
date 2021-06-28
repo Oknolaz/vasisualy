@@ -1,5 +1,5 @@
 from translate import Translator
-from ..core import speak
+from ..core import (speak, defaults)
 
 trigger = ("Переведи слово", "переведи слово", "Переведи слова", "переведи слова", "Переведи фразу", "переведи фразу",
            "Переведи предложение", "переведи предложение", "Переведи текст", "переведи текст", "Переведи", "переведи")
@@ -66,9 +66,13 @@ def main(say, widget):
             if trans_text in ('', ' ', '  ', '   '):
                 toSpeak = "Укажите текст, который нужно перевести."
             elif not isTranslated:
-                # Если во входящем сообщении нет поддерживаемого языка происходит перевод с русского на английский
-                to_lang = "en"
-                from_lang = "ru"
+                # Если во входящем сообщении нет поддерживаемого языка происходит перевод указанных в настройках языков
+                try:
+                    to_lang = defaults.get_value("to_lang")
+                    from_lang = defaults.get_value("from_lang")
+                except FileNotFoundError:
+                    to_lang = defaults.defaults["to_lang"]
+                    from_lang = defaults.defaults["from_lang"]
 
             translator = Translator(to_lang=to_lang, from_lang=from_lang)
             toSpeak = translator.translate(trans_text)

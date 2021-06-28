@@ -36,9 +36,6 @@ class Ui_MainWindow(object):
         self.pushButton.setIconSize(QtCore.QSize(35, 28))
         self.pushButton.setObjectName("pushButton")
         self.gridLayout.addWidget(self.pushButton, 1, 2, 1, 1)
-        self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setObjectName("label")
-        self.gridLayout.addWidget(self.label, 1, 0, 1, 1)
         self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit.setText("")
         self.lineEdit.setObjectName("lineEdit")
@@ -68,7 +65,6 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Vasisualy"))
-        self.label.setText(_translate("MainWindow", "Вы:"))
         self.settingsMenu.setTitle(_translate("MainWindow", "Параметры"))
         self.aboutMenu.setTitle(_translate("MainWindow", "Справка"))
         self.settings.setText(_translate("MainWindow", "Настройки"))

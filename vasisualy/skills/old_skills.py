@@ -7,7 +7,7 @@ def old_skills_activate(user_message, widget, _cls):
     :param: user_message - сообщение пользователя (string)
     :param: widget - виджет, в который должно выводиться сообщение навыка (QWidget)
     '''
-    skills = ("time_date", "exit", "joke", "weather", "music", "open", "screenshot", "search", "poweroff",
+    skills = ("time_date", "exit", "weather", "music", "open", "screenshot", "search", "poweroff",
               "ytvideo", "resay", "map", "wiki", "location", "weather_no_city", "translate", "news", "coin",
               "upd_upg", "shoplist", "todolist", "netconnection", "record", "math", "audio", "crystal_ball",
               "random_num", "timer")

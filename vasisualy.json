@@ -1,0 +1,12 @@
+{
+	"voice": "Artemiy",
+	"speed": 30,
+	"pitch": 0,
+	"wiki_sentences": 4,
+	"music": "music/",
+	"theme": "System",
+	"to_lang": "en",
+	"from_lang": "ru",
+	"weather_api": "",
+	"weather_city": "Лондон"
+}
