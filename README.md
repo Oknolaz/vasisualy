@@ -62,7 +62,7 @@ yay -Sy rhvoice python-vlc
 ```
 Установите необходимые пакеты с помощью [Pacman](https://wiki.archlinux.org/index.php/Pacman_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9)):
 ```
-pacman -Sy python-pyaudio python-pyqt5 python-alsa speech-dispatcher qt5-webengine vlc python-pyqt5-webengine
+pacman -Sy python-pyaudio python-pyqt5 python-pyalsa speech-dispatcher qt5-webengine vlc python-pyqt5-webengine
 ```
 Клонируйте данный репозиторий:
 ```
@@ -79,7 +79,7 @@ python3 run.py
 ```
 **Также доступен [AUR репозиторий](https://aur.archlinux.org/packages/vasisualy-git/)**
 ### CLI для GNU/Linux
-Для CLI версии с распознаванием речи, адаптированной для одноплатных компьютеров (Raspberry Pi, Orange Pi и др.):
+Для [CLI версии](https://github.com/Oknolaz/vasisualy-pi) с распознаванием речи, адаптированной для одноплатных компьютеров (Raspberry Pi, Orange Pi и др.):
 ```
 git clone https://github.com/Oknolaz/vasisualy-pi
 cd vasisualy-pi
