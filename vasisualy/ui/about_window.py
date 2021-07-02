@@ -57,7 +57,7 @@ class Ui_Dialog(object):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "О программе"))
         self.name.setText(_translate("Dialog", "**Vasisualy - свободный русскоязычный голосовой ассистент.**"))
-        self.version.setText(_translate("Dialog", "0.6.5"))
+        self.version.setText(_translate("Dialog", "0.7.1"))
         self.link.setText(_translate("Dialog", "https://github.com/Oknolaz/vasisualy"))
         self.license.setText(_translate("Dialog", "Это приложение распространяется без каких-либо гарантий.\n"
 "Подробнее в [GNU General Public License 3.0](https://gnu.org/licenses/gpl-3.0.en.html)."))
