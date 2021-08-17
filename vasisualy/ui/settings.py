@@ -9,6 +9,9 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from ..core import speak
+
+n = 0
 
 
 class Ui_Dialog(object):
@@ -41,8 +44,9 @@ class Ui_Dialog(object):
         self.voiceBox.setToolTip("")
         self.voiceBox.setToolTipDuration(-1)
         self.voiceBox.setObjectName("voiceBox")
-        self.voiceBox.addItem("")
-        self.voiceBox.addItem("")
+        for voice in speak.tts_d.list_synthesis_voices():
+            if voice[1] == "ru":
+                self.voiceBox.addItem("")
         self.gridLayout_2.addWidget(self.voiceBox, 0, 1, 1, 2)
         self.toLangCombo = QtWidgets.QComboBox(self.scrollAreaWidgetContents)
         self.toLangCombo.setObjectName("toLangCombo")
@@ -152,12 +156,15 @@ class Ui_Dialog(object):
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):
+        global n
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Настройки"))
         self.speedLabel.setText(_translate("Dialog", "Скорость речи:"))
         self.toLangLabel.setText(_translate("Dialog", "Переводимый язык по умолчанию:"))
-        self.voiceBox.setItemText(0, _translate("Dialog", "Artemiy"))
-        self.voiceBox.setItemText(1, _translate("Dialog", "Aleksandr"))
+        for voice in speak.tts_d.list_synthesis_voices():
+            if voice[1] == "ru":
+                self.voiceBox.setItemText(n, _translate("Dialog", voice[0]))
+                n += 1
         self.toLangCombo.setItemText(0, _translate("Dialog", "en"))
         self.toLangCombo.setItemText(1, _translate("Dialog", "ru"))
         self.toLangCombo.setItemText(2, _translate("Dialog", "it"))

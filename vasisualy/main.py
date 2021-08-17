@@ -9,7 +9,9 @@ from qt_material import apply_stylesheet
 
 # Core
 from .core import (speak, talk, recognise, defaults)
+from .utils.tmpdir import tmp
 import random
+import os
 
 # Skills
 from .skills import (skill_loader, time_date, exit, weather, music, open, screenshot, search, poweroff, ytvideo,
@@ -93,6 +95,8 @@ class Main(QtWidgets.QMainWindow, design.Ui_MainWindow):
         self.program()
 
     def program(self):
+        global tmp
+
         say = self.say
         skillUse = False
         
@@ -104,7 +108,16 @@ class Main(QtWidgets.QMainWindow, design.Ui_MainWindow):
             item.setTextAlignment(0x0002)
             self.listWidget.addItem(item)
 
-        if old_skills.old_skills_activate(say, self.listWidget, self):
+        if os.path.exists(f"{tmp}/.skill_lock"):
+            # Если файл блокировки существует - сообщение пользователя
+            # передаётся запущенному циклу навыка.
+            skill_loader.run_looped(say, self.listWidget)
+            skillUse = True
+
+        elif skill_loader.run_skills(say, self.listWidget):
+            skillUse = True
+
+        elif old_skills.old_skills_activate(say, self.listWidget, self):
             skillUse = True
 
         elif guess_num.isTriggered(say):
@@ -117,9 +130,6 @@ class Main(QtWidgets.QMainWindow, design.Ui_MainWindow):
             skillUse = True
             global isRuLette
             isRuLette = rulette.startGame(self.listWidget)
-
-        elif skill_loader.run_skills(say, self.listWidget):
-            skillUse = True
         
         elif say == 'stop' or say == 'Stop' or say == 'Стоп' or say == 'стоп':
             speak.tts_d.stop()
@@ -131,7 +141,7 @@ class Main(QtWidgets.QMainWindow, design.Ui_MainWindow):
             isRuLette = rulette.game(say, self.listWidget)
             
         else:
-            if talk.talk(say) != "" and not skillUse:
+            if talk.talk(say) and not skillUse:
                 speak.speak(talk.talk(say), self.listWidget)
             elif not skillUse:
                 if say != "":
@@ -145,12 +155,13 @@ def main():
     window = Main()
 
     try:
-        theme = defaults.get_value("theme")
+        theme = defaults.get_value("theme")  # Установка темы Qt5-приложения
     except FileNotFoundError:
         theme = defaults.defaults["theme"]
 
     if theme != "System":
         apply_stylesheet(app, theme=styles[theme])
+
     window.show()
     app.exec_()
     speak.tts_d.close()

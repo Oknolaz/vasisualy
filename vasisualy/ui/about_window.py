@@ -20,8 +20,7 @@ class Ui_Dialog(object):
         self.image = QtWidgets.QLabel(Dialog)
         self.image.setGeometry(QtCore.QRect(120, 10, 171, 121))
         self.image.setText("")
-        appDir = os.path.dirname(os.path.realpath(__file__))
-        self.image.setPixmap(QtGui.QPixmap(f"{appDir}/vas.png"))
+        self.image.setPixmap(QtGui.QPixmap(f"vasisualy/ui/vas.png"))
         self.image.setObjectName("image")
         self.name = QtWidgets.QLabel(Dialog)
         self.name.setGeometry(QtCore.QRect(20, 120, 361, 41))
@@ -57,7 +56,7 @@ class Ui_Dialog(object):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "О программе"))
         self.name.setText(_translate("Dialog", "**Vasisualy - свободный русскоязычный голосовой ассистент.**"))
-        self.version.setText(_translate("Dialog", "0.7.1"))
+        self.version.setText(_translate("Dialog", "0.8.0"))
         self.link.setText(_translate("Dialog", "https://github.com/Oknolaz/vasisualy"))
         self.license.setText(_translate("Dialog", "Это приложение распространяется без каких-либо гарантий.\n"
 "Подробнее в [GNU General Public License 3.0](https://gnu.org/licenses/gpl-3.0.en.html)."))

@@ -8,7 +8,7 @@ long_description = (here / 'README.md').read_text(encoding='utf-8')
 setup(
     name='Vasisualy',
 
-    version='0.7.1',
+    version='0.8.0',
 
     description='Russian voice assistant for GNU/Linux.',
     
@@ -50,7 +50,9 @@ setup(
     package_data={
         'vasisualy': ['assets/shot.wav', 'assets/misfire.wav', 'music/test.wav', 'assets/beep.wav'],
         'vasisualy.ui': ['vas.png'],
-        'vasisualy.skills.hello_world': ['hello_world.trigger']
+        'vasisualy.skills.hello_world': ['hello_world.trigger'],
+        'vasisualy.skills.jokes': ['jokes.trigger'],
+        'vasisualy.skills.guess_the_animal': ['guess_the_animal.trigger'],
     },
 
     python_requires='>=3.7, <4',

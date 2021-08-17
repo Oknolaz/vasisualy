@@ -29,7 +29,7 @@
 
 ## Установка
 ### GNU/Linux
-**Вы можете скачать AppImage, работающий во всех дистрибутивах, со [страницы релизов](https://github.com/Oknolaz/vasisualy/releases).**
+**Вы можете скачать AppImage, работающий во многих дистрибутивах, со [страницы релизов](https://github.com/Oknolaz/vasisualy/releases).**
 ### Debian/Ubuntu
 Для начала Вам понадобится установить синтезатор речи [RHVoice](https://github.com/Olga-Yakovleva/RHVoice/):
 ```
@@ -43,7 +43,7 @@ sudo apt-get install python3-speechd python3-pyqt5 vlc python3-pyqt5.qtwebengine
 ```
 Клонируйте данный репозиторий с помощью Git:
 ```
-git clone https://github.com/Oknolaz/vasisualy
+git clone --recursive https://github.com/Oknolaz/vasisualy
 cd vasisualy
 ```
 Далее необходимо установить другие модули с помощью pip:
@@ -66,7 +66,7 @@ pacman -Sy python-pyaudio python-pyqt5 python-pyalsa speech-dispatcher qt5-weben
 ```
 Клонируйте данный репозиторий:
 ```
-git clone https://github.com/Oknolaz/vasisualy
+git clone --recursive https://github.com/Oknolaz/vasisualy
 cd vasisualy
 ```
 Затем установите зависимости с помощью Pip:
@@ -81,7 +81,7 @@ python3 run.py
 ### CLI для GNU/Linux
 Для [CLI версии](https://github.com/Oknolaz/vasisualy-pi) с распознаванием речи, адаптированной для одноплатных компьютеров (Raspberry Pi, Orange Pi и др.):
 ```
-git clone https://github.com/Oknolaz/vasisualy-pi
+git clone --recursive https://github.com/Oknolaz/vasisualy-pi
 cd vasisualy-pi
 python3 run.py
 ```

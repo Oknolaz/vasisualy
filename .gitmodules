@@ -1,0 +1,9 @@
+[submodule "vasisualy/skills/jokes"]
+	path = vasisualy/skills/jokes
+	url = https://github.com/Oknolaz/jokes_skill
+[submodule "vasisualy/skills/hello_world"]
+	path = vasisualy/skills/hello_world
+	url = https://github.com/Oknolaz/hello_world_skill
+[submodule "vasisualy/skills/guess_the_animal"]
+	path = vasisualy/skills/guess_the_animal
+	url = https://github.com/Oknolaz/guess_the_animal_skill
