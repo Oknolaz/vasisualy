@@ -3,7 +3,7 @@ import sys
 from pathlib import Path
 import json
 import tempfile
-from vasisualy.utils.tmpdir import tmp
+from vasisualy.utils import tmp
 
 
 class Skill:
@@ -88,4 +88,7 @@ class Skill:
             settings[parameter] = value
             with open(self.settings_path, "w") as file:
                 json.dump(file, settings)
+                
+    def get_temp_dir(self):
+        return f"{self.tmpdir}/{self.name}"
 

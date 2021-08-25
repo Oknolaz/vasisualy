@@ -8,7 +8,7 @@ long_description = (here / 'README.md').read_text(encoding='utf-8')
 setup(
     name='Vasisualy',
 
-    version='0.8.0',
+    version='0.8.1',
 
     description='Russian voice assistant for GNU/Linux.',
     
