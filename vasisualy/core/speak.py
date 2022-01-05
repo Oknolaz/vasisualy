@@ -5,6 +5,7 @@ from . import defaults
 tts_d = speechd.SSIPClient('Vasisya')
 tts_d.set_output_module('rhvoice')
 tts_d.set_language('ru')
+
 try:
     voice = defaults.get_value("voice")
     speed = defaults.get_value("speed")

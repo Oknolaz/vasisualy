@@ -12,6 +12,5 @@ pyqt5
 pyqtwebengine
 scipy
 sounddevice
-pyalsaaudio
 plyer
 ru_word2number
