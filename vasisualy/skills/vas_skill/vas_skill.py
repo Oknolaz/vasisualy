@@ -39,7 +39,9 @@ class Skill:
         file = open(f"{str(Path(self.root))}/{self.name}.trigger")
         triggers = []
         for line in file:
-            if line != "\n":
+            if "e:" in line:
+            	continue
+            elif line != "\n":
                 triggers.append(line.replace("\n", ''))
         return triggers
 
@@ -55,7 +57,6 @@ class Skill:
     def _is_triggered(user_message, triggers):
         # Проверяет соответствует ли сообщение, переданное пользователем, триггеру.
         for trigger in triggers:
-            #if trigger in user_message:
             if fuzz.partial_ratio(user_message, trigger) > 75:
                 triggered = True
                 break

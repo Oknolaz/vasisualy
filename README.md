@@ -111,4 +111,5 @@ Vasisualy -- это свободное программное обеспечен
 С вопросами и трудностями обращайтесь в нашу Telegram группу: [Vasisualy](https://t.me/vasisya)[<img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" height="40px"></img>](https://t.me/vasisualy_voice_assistant)
 
 Built with :heart: by the [Oknolaz](https://github.com/Oknolaz)
+
 And special thanks to [Gabriel Kang](https://www.gabrielkang.com/):point_left: for the icon and logo

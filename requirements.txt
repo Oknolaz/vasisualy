@@ -14,3 +14,4 @@ scipy
 sounddevice
 plyer
 ru_word2number
+fuzzywuzzy

@@ -62,7 +62,7 @@ def main(say, widget):
                 elif say in stop_music:
                     pass
                 else:
-                    toSpeak = "Включаю музыку из твоей папки. Если хочешь слушать радио - то скажи \"включи (жанр) музыку\"."
+                    toSpeak = "Включаю музыку из твоей папки."
                     playFromDir()
             except Exception:
                 if say in stop_music:
@@ -76,10 +76,8 @@ def main(say, widget):
             
     for i in stop_music:
         if i == say:
-            global usrPlayer
             toSpeak = "Проигрыватель остановлен."
             player.pause()  # Остановка проигрывателя
-            usrPlayer.stop()
             
     for i in nextSong:
         if i == say:
@@ -101,11 +99,13 @@ def playFromDir():
         musicDir = defaults.defaults["music"]
     playlist = os.listdir(musicDir)  # Получение списка файлов из директории music в корне проекта
     if musicIsPlayed:
-        usrPlayer.stop()
-        usrPlayer = vlc.MediaPlayer(f'{musicDir}/{random.choice(playlist)}')
-        usrPlayer.play()
+        player.stop()
+        media = inst.media_new(f"{musicDir}/{random.choice(playlist)}")
+        player.set_media(media)
+        player.play()
     else:
         # Воспроизведение музыки из папки music
-        usrPlayer = vlc.MediaPlayer(f'{musicDir}/{random.choice(playlist)}')
-        usrPlayer.play()
+        media = inst.media_new(f"{musicDir}/{random.choice(playlist)}")
+        player.set_media(media)
+        player.play()
         musicIsPlayed = True
