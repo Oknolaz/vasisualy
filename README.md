@@ -2,6 +2,8 @@
 [<img src="vasisualy/assets/icons/white icon.png"></img>]()
 
 Васисуалий - это простой голосовой помощник, уважающий вашу свободу. Поддерживается только русский язык.
+
+:attention:*Данный branch содержит исходный код для версии со свободным распознавателем речи ([Vosk](https://github.com/alphacep/vosk-api)), т.е. данная версия не посылает ваш голос на сервера Google.*
 ## Поддерживаемые платформы :floppy_disk:
 - **GNU/Linux (Qt5 и CLI)** :penguin:
 - **Microsoft Windows** :window:
@@ -45,7 +47,7 @@ sudo apt-get install python3-speechd python3-pyqt5 vlc python3-pyqt5.qtwebengine
 ```
 Клонируйте данный репозиторий с помощью Git:
 ```
-git clone --recursive https://github.com/Oknolaz/vasisualy
+git clone --recursive https://github.com/Oknolaz/vasisualy -b free-speech
 cd vasisualy
 ```
 Далее необходимо установить другие модули с помощью pip:

@@ -1,6 +1,23 @@
 from . import speak
-import speech_recognition
+import vosk
 from PyQt5 import QtGui
+import queue
+import sounddevice as sd
+import sys
+import json
+
+q = queue.Queue()
+
+device_info = sd.query_devices(0, 'input')
+# soundfile expects an int, sounddevice provides a float:
+samplerate = int(device_info['default_samplerate'])
+
+
+def callback(indata, frames, time, status):
+    # This is called (from a separate thread) for each audio block.
+    if status:
+        print(status, file=sys.stderr)
+    q.put(bytes(indata))
 
 
 def recognise(_cls, widget):
@@ -13,26 +30,24 @@ def recognise(_cls, widget):
     mic_off = QtGui.QIcon.fromTheme("mic-off")  # Иконка для состояния покоя
     _cls.pushButton.setIcon(mic_on)  # Установка иконки во время распознавания речи
     
-    # Настройки распознавания речи
-    recognizer = speech_recognition.Recognizer()
-    recognizer.pause_threshold = 0.5
-    mph = speech_recognition.Microphone()
-        
     print("[sys] Говорите...")
-        
-    with mph as source:
-        say = recognizer.listen(source)  # Прослушка микрофона
-        
-    print("[sys] Речь распознаётся...")
-        
-    try:
-        # Распознавание речи, сохранение распознанной информации в переменную
-        say = recognizer.recognize_google(say, language="ru-RU")
-        say = say.capitalize()
-        print("[sys] Речь распознана.")
-    except Exception:
+
+    try:    
+        with sd.RawInputStream(samplerate=samplerate, blocksize = 8000, device=0, dtype='int16',
+            channels=1, callback=callback):
+            model = vosk.Model("model")
+            rec = vosk.KaldiRecognizer(model, samplerate)
+            print("[sys] Речь распознаётся...")
+            while True:
+                data = q.get()
+                if rec.AcceptWaveform(data):
+                    detect = json.loads(rec.Result())
+                    say = detect["text"].capitalize()
+                    print("[sys] Речь распознана.")
+                    break
+    except Exception as err:
+        print(f"[sys] Не удалось распознать речь. Ошибка {err}.")
+        speak.speak("Кажется, у меня проблемы со слухом. Не могу понять что ты говоришь.", widget)
         say = ''
-        print("[sys] Не удалось распознать речь. Нет подключения к интернету или не подключен микрофон.")
-        speak.speak("Речь не распознана.", widget)
     _cls.pushButton.setIcon(mic_off)  # Установка иконки спокойствия
     return say
