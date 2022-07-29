@@ -69,7 +69,7 @@ class Main(QtWidgets.QMainWindow, design.Ui_MainWindow):
 
         skill_loader.load()  # Импорт "новых" навыков
 
-        self.lineEdit.editingFinished.connect(self.vasmsg)
+        self.lineEdit.returnPressed.connect(self.vasmsg)
         self.pushButton.clicked.connect(self.recogniser)
         self.aboutMenu.triggered.connect(self.showAboutDialog)
         self.settingsMenu.triggered.connect(self.showSettingsDialog)
