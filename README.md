@@ -109,9 +109,6 @@ python run.py
 ## Лицензия :book:
 Vasisualy -- это свободное программное обеспечение: вы можете использовать и изменять его по условиям лицензии [GNU General Public License 3.0](https://www.gnu.org/licenses/gpl-3.0.en.html).
 
-## Поддержка :dollar:
-С вопросами и трудностями обращайтесь в нашу Telegram группу: [Vasisualy](https://t.me/vasisya)[<img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" height="40px"></img>](https://t.me/vasisualy_voice_assistant)
-
 Built with :heart: by the [Oknolaz](https://github.com/Oknolaz)
 
 And special thanks to [Gabriel Kang](https://www.gabrielkang.com/):point_left: for the icon and logo
